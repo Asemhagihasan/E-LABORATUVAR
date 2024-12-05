@@ -55,9 +55,9 @@ const DatePickerField: React.FC<DatePickerFieldProps> = ({
           className={`flex flex-row justify-between items-center rounded-xl px-2.5 py-[19px] border border-neutral-300 shadow-black ${containerStyle}`}
         >
           <Text
-            className={`font-semibold text-base text-left text-neutral-950 ${
-              value ? "" : "text-neutral-400"
-            } ${inputStyle}`}
+            className={`font-semibold text-base text-left ${
+              !value ? "text-neutral-400" : "text-neutral-950"
+            } ${value ? "" : "text-neutral-400"} ${inputStyle}`}
           >
             {value || placeholder}
           </Text>

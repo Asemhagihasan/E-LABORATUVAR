@@ -1,26 +1,29 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { useEffect } from "react";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import React from "react";
 import { Redirect } from "expo-router";
 import { useUser } from "@/hooks/useUser";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const index = () => {
   const { isLoadingUser, isAuthonticated, metaData, user } = useUser();
-  console.log("user", user);
 
-  useEffect(() => {
-    const getSession = async () => {
-      try {
-        const session = await AsyncStorage.getItem("supabase.auth.token");
-        console.log("Stored session:", session);
-      } catch (error) {
-        console.error("Error retrieving session:", error);
-      }
-    };
-    getSession();
-  }, []);
+  const role = metaData?.role;
 
-  return <Redirect href="./(auth)/sign-up" />;
+  if (isLoadingUser)
+    return (
+      <View className="h-full bg-white flex-1 items-center justify-center">
+        <ActivityIndicator size="large" color="#1D61E7" />
+      </View>
+    );
+
+  return isAuthonticated ? (
+    role === "user" ? (
+      <Redirect href={`./(userRoot)/(tabs)/explore`} /> // redirect to user dashboard
+    ) : (
+      <Redirect href={`./(adminRoot)/(tabs)/index`} /> // redirect to admin dashboard (not create yet)
+    )
+  ) : (
+    <Redirect href="./(auth)/sign-in" />
+  );
 };
 
 export default index;

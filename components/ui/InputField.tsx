@@ -22,6 +22,7 @@ const InputField = ({
   labelStyle,
   disabled = false,
   keypoardType = "default",
+  errorMessage,
   ...props
 }: InputFieldProps) => {
   return (
@@ -48,9 +49,13 @@ const InputField = ({
               editable={!disabled}
               placeholder={placeholder}
               secureTextEntry={secureTextEntry}
+              keyboardType={keypoardType}
               {...props}
             />
           </View>
+          {errorMessage && (
+            <Text className="text-sm text-red-500 mt-2">{errorMessage}</Text>
+          )}
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
