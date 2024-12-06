@@ -54,7 +54,7 @@ const InputField = ({
             />
           </View>
           {errorMessage && (
-            <Text className="text-sm text-red-500 mt-2">{errorMessage}</Text>
+            <Text className="text-base text-red-500 mt-2">{errorMessage}</Text>
           )}
         </View>
       </TouchableWithoutFeedback>

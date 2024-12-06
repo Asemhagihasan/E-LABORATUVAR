@@ -1,6 +1,6 @@
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
-import React from "react";
-import { Redirect } from "expo-router";
+import React, { useEffect } from "react";
+import { Redirect, router } from "expo-router";
 import { useUser } from "@/hooks/useUser";
 
 const index = () => {
@@ -17,7 +17,7 @@ const index = () => {
 
   return isAuthonticated ? (
     role === "user" ? (
-      <Redirect href={`./(userRoot)/(tabs)/explore`} /> // redirect to user dashboard
+      <Redirect href={`./(userRoot)/(tabs)/home`} /> // redirect to user dashboard
     ) : (
       <Redirect href={`./(adminRoot)/(tabs)/index`} /> // redirect to admin dashboard (not create yet)
     )
