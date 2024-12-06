@@ -14,9 +14,10 @@ export const SignUpSchema = z.object({
     .min(8, "Password must be at least 6 characters")
     .max(16, "Password must be less than 50 characters")
     .regex(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-      "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
+      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/,
+      "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, and one number"
     ),
+
   tc: z
     .string()
     .min(1, { message: "TC is required" })

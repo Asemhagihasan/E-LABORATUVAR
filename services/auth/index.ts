@@ -15,17 +15,23 @@ export async function signUp(formData: SignUpProps) {
     throw new Error(error.message);
   }
 
-  const { error: patientError } = await supabase.from("patients").insert({
-    user_id: authUser?.user?.id,
-    full_name: formData.fullName,
-    birth_date: formData.birthDate,
-    tc: formData.tc,
-  });
-
-  if (patientError) throw new Error(patientError.message);
-
   if (formData.role === "admin") {
     // add user to admin group
+  } else if (formData.role === "user") {
+    const { error: patientError } = await supabase.from("patients").insert({
+      user_id: authUser?.user?.id,
+      full_name: formData.fullName,
+      birth_date: formData.birthDate,
+      tc: formData.tc,
+    });
+
+    if (patientError) {
+      await supabase.auth.admin.deleteUser(authUser?.user?.id!);
+      throw new Error(patientError.message);
+    }
+  } else {
+    await supabase.auth.admin.deleteUser(authUser?.user?.id!);
+    throw new Error("Invalid role");
   }
 
   return authUser;
@@ -40,6 +46,14 @@ export async function login({ email, password }: SignInProps) {
     throw new Error(error.message);
   }
   return data;
+}
+
+export async function logout() {
+  const { error } = await supabase.auth.signOut();
+  if (error) {
+    throw new Error(error.message);
+  }
+  return true;
 }
 
 export async function getCurrentUser() {

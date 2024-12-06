@@ -1,31 +1,86 @@
 import { Tabs } from "expo-router";
 import React from "react";
-import { Platform } from "react-native";
+import { Text, View } from "react-native";
+import {
+  MaterialIcons,
+  AntDesign,
+  Ionicons,
+  Fontisto,
+} from "@expo/vector-icons";
 
 export default function TabLayout() {
+  const TabIcon = ({ color, focused, name, icon }) => {
+    return (
+      <View className="flex items-center justify-center gap-2 grow w-24 h-full mb-6">
+        {icon}
+        <Text style={{ color: color }} className={`font-semibold text-sm`}>
+          {name}
+        </Text>
+      </View>
+    );
+  };
   return (
     <Tabs
       screenOptions={{
-        headerShown: false,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: "absolute",
-          },
-          default: {},
-        }),
+        tabBarShowLabel: false,
+        tabBarActiveTintColor: "#1D61E7",
+        tabBarInactiveTintColor: "#CDCDE0",
+
+        tabBarStyle: {
+          height: 70,
+          // backgroundColor: "#161622",
+          borderTopWidth: 1,
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        },
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
+          headerShown: false,
           title: "Home",
+          tabBarIcon: ({ color, focused }) => {
+            return (
+              <TabIcon
+                color={color}
+                focused={focused}
+                name="Home"
+                icon={
+                  <Ionicons
+                    name="home"
+                    size={24}
+                    color={`${focused ? "#1D61E7" : "#CDCDE0"}`}
+                  />
+                }
+              />
+            );
+          },
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="profile"
         options={{
-          title: "Explore",
+          headerShown: false,
+          title: "Profile",
+          tabBarIcon: ({ color, focused }) => {
+            return (
+              <TabIcon
+                color={color}
+                focused={focused}
+                name="BookMark"
+                icon={
+                  <Ionicons
+                    name="person"
+                    size={24}
+                    color={`${focused ? "#1D61E7" : "#CDCDE0"}`}
+                  />
+                }
+              />
+            );
+          },
         }}
       />
     </Tabs>
