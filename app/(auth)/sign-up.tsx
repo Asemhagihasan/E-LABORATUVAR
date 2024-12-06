@@ -26,6 +26,8 @@ const SignUp = () => {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
+    data.role = "user";
+    console.log("data", data);
     signUp(data as SignUpProps);
   };
 
@@ -59,7 +61,7 @@ const SignUp = () => {
                 control={methods.control}
                 name="fullName"
                 render={({
-                  field: { value, onChange, onBlur },
+                  field: { value, onChange },
                   fieldState: { error },
                 }) => {
                   return (
@@ -77,7 +79,7 @@ const SignUp = () => {
                 control={methods.control}
                 name="email"
                 render={({
-                  field: { value, onChange, onBlur },
+                  field: { value, onChange },
                   fieldState: { error },
                 }) => {
                   return (
@@ -96,7 +98,7 @@ const SignUp = () => {
                 control={methods.control}
                 name="password"
                 render={({
-                  field: { value, onChange, onBlur },
+                  field: { value, onChange },
                   fieldState: { error },
                 }) => {
                   return (
@@ -115,7 +117,7 @@ const SignUp = () => {
                 control={methods.control}
                 name="tc"
                 render={({
-                  field: { value, onChange, onBlur },
+                  field: { value, onChange },
                   fieldState: { error },
                 }) => {
                   return (
@@ -140,7 +142,7 @@ const SignUp = () => {
             </View>
             <Button
               title={"Sign Up"}
-              onPress={methods.handleSubmit(onSubmit, onError)}
+              onPress={methods.handleSubmit(onSubmit)}
             />
           </FormProvider>
           <View className="flex flex-row justify-center items-center my-8 ">
