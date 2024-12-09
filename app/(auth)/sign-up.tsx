@@ -18,7 +18,6 @@ import { useSignUp } from "@/hooks/useSignUp";
 import { SignUpProps } from "@/types";
 import { SafeAreaView } from "react-native-safe-area-context";
 const SignUp = () => {
-  // const [selectedDate, setSelectedDate] = useState<string>("");
   const { signUp } = useSignUp();
 
   const methods = useForm({

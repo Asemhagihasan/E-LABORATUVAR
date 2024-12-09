@@ -24,7 +24,6 @@ export async function signUp(formData: SignUpProps) {
       birth_date: formData.birthDate,
       tc: formData.tc,
     });
-
     if (patientError) {
       await supabase.auth.admin.deleteUser(authUser?.user?.id!);
       throw new Error(patientError.message);
@@ -68,4 +67,35 @@ export async function getCurrentUser() {
   return data?.user;
 }
 
-export async function addPatient() {}
+export async function updateCurrentUser(formData: any) {
+  if (formData.newPassword) {
+    const { error } = await supabase.auth.updateUser({
+      email: formData.email,
+      password: formData.newPassword,
+    });
+    if (error) throw new Error(`Auth update failed: ${error.message}`);
+  }
+
+  if (formData.role === "admin") {
+  } else if (formData.role === "user") {
+    console.log("userId:", formData.userId);
+    const { data, error } = await supabase
+      .from("patients")
+      .update({
+        birth_date: formData.birthDate,
+        address: formData.address,
+        gender: formData.gender,
+        full_name: formData.fullName,
+        phone: formData.phone,
+      })
+      .eq("user_id", formData.userId); // Ensure userId is valid
+
+    if (error) throw new Error(`Patient update failed: ${error.message}`);
+
+    console.log("Updated patient data:", data); // Log updated data to check results
+  } else {
+    throw new Error("Invalid role");
+  }
+
+  return { success: true, message: "User updated successfully" };
+}
