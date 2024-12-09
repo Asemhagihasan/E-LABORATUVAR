@@ -7,9 +7,10 @@ import {
   Ionicons,
   Fontisto,
 } from "@expo/vector-icons";
+import { TabsProps } from "@/types";
 
 export default function TabLayout() {
-  const TabIcon = ({ color, focused, name, icon }) => {
+  const TabIcon = ({ color, name, icon }: TabsProps) => {
     return (
       <View className="flex items-center justify-center gap-2 grow w-24 h-full mb-6">
         {icon}
@@ -46,7 +47,6 @@ export default function TabLayout() {
             return (
               <TabIcon
                 color={color}
-                focused={focused}
                 name="Home"
                 icon={
                   <Ionicons
@@ -69,8 +69,7 @@ export default function TabLayout() {
             return (
               <TabIcon
                 color={color}
-                focused={focused}
-                name="BookMark"
+                name="Profile"
                 icon={
                   <Ionicons
                     name="person"

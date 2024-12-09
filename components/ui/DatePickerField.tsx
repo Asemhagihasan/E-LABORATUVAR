@@ -10,16 +10,7 @@ import {
 } from "react-native";
 import DatePicker from "react-native-modern-datepicker";
 import Feather from "@expo/vector-icons/Feather";
-interface DatePickerFieldProps {
-  label?: string;
-  placeholder?: string;
-  value?: string; // Updated to string for compatibility with DatePicker
-  onDateChange?: (date: string) => void;
-  containerStyle?: string;
-  inputStyle?: string;
-  labelStyle?: string;
-  disabled?: boolean;
-}
+import { DatePickerFieldProps } from "@/types";
 
 const DatePickerField: React.FC<DatePickerFieldProps> = ({
   label,
@@ -69,6 +60,7 @@ const DatePickerField: React.FC<DatePickerFieldProps> = ({
             mode="calendar"
             selected={value || new Date().toISOString().split("T")[0]} // Default to today's date
             onDateChange={handleDateChange} // Pass the selected date as a string
+            maximumDate={new Date().toISOString().split("T")[0]}
             options={{
               backgroundColor: "#f9fafb",
               textHeaderColor: "#2563eb",
