@@ -1,5 +1,6 @@
 import { SignInProps, SignUpProps } from "@/types";
 import { supabase } from "../supabase";
+import { genders } from "@/constants";
 
 export async function signUp(formData: SignUpProps) {
   const { data: authUser, error } = await supabase.auth.signUp({
@@ -15,23 +16,13 @@ export async function signUp(formData: SignUpProps) {
     throw new Error(error.message);
   }
 
-  if (formData.role === "admin") {
-    // add user to admin group
-  } else if (formData.role === "user") {
-    const { error: patientError } = await supabase.from("patients").insert({
-      user_id: authUser?.user?.id,
-      full_name: formData.fullName,
-      birth_date: formData.birthDate,
-      tc: formData.tc,
-    });
-    if (patientError) {
-      await supabase.auth.admin.deleteUser(authUser?.user?.id!);
-      throw new Error(patientError.message);
-    }
-  } else {
-    await supabase.auth.admin.deleteUser(authUser?.user?.id!);
-    throw new Error("Invalid role");
-  }
+  const { error: userError } = await supabase.from("profiles").insert({
+    user_id: authUser?.user?.id,
+    full_name: formData.fullName,
+    birth_date: formData.birthDate,
+    tc: formData.tc,
+  });
+  if (userError) await supabase.auth.admin.deleteUser(authUser?.user?.id!);
 
   return authUser;
 }
@@ -68,6 +59,8 @@ export async function getCurrentUser() {
 }
 
 export async function updateCurrentUser(formData: any) {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
   if (formData.newPassword) {
     const { error } = await supabase.auth.updateUser({
       email: formData.email,
@@ -76,26 +69,18 @@ export async function updateCurrentUser(formData: any) {
     if (error) throw new Error(`Auth update failed: ${error.message}`);
   }
 
-  if (formData.role === "admin") {
-  } else if (formData.role === "user") {
-    console.log("userId:", formData.userId);
-    const { data, error } = await supabase
-      .from("patients")
-      .update({
-        birth_date: formData.birthDate,
-        address: formData.address,
-        gender: formData.gender,
-        full_name: formData.fullName,
-        phone: formData.phone,
-      })
-      .eq("user_id", formData.userId); // Ensure userId is valid
+  const { data, error } = await supabase
+    .from("profiles")
+    .update({
+      full_name: formData.fullName,
+      birth_date: formData.birthDate,
+      gender: formData.gender,
+      address: formData.address,
+      phone: formData.phone,
+    })
+    .eq("user_id", formData.userId);
 
-    if (error) throw new Error(`Patient update failed: ${error.message}`);
+  if (error) throw new Error(`Profile update failed: ${error.message}`);
 
-    console.log("Updated patient data:", data); // Log updated data to check results
-  } else {
-    throw new Error("Invalid role");
-  }
-
-  return { success: true, message: "User updated successfully" };
+  return data;
 }
