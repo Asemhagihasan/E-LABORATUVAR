@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 import "../styles/global.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import ToastContainer from "@/components/ui/ToastContainer";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -38,6 +39,7 @@ export default function RootLayout() {
           <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         </Stack>
         <StatusBar style="auto" />
+        {/* <ToastContainer /> */}
       </QueryClientProvider>
     </>
   );

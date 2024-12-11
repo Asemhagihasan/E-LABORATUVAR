@@ -12,14 +12,18 @@ import Feather from "@expo/vector-icons/Feather";
 
 interface FileUploadProps {
   label?: string;
-  onFileSelect: (file: { uri: string; type: string; name: string }) => void;
+  onFileSelect: (file: { uri: string }) => void;
+  defaultValue?: { uri: string } | null;
 }
 
 const FileUpload: React.FC<FileUploadProps> = ({
   label = "Upload Photo",
   onFileSelect,
+  defaultValue = {
+    uri: "",
+  },
 }) => {
-  const [file, setFile] = useState<{ uri: string } | null>(null);
+  const [file, setFile] = useState<{ uri: string } | null>(defaultValue);
 
   const handleUpload = async () => {
     // Ask for permission to access media library
@@ -42,20 +46,21 @@ const FileUpload: React.FC<FileUploadProps> = ({
 
     if (!pickerResult.canceled) {
       const { uri } = pickerResult.assets[0];
+      console.log(uri);
       const fileData = {
         uri,
         type: "image/jpeg", // Adjust based on your file type
         name: uri.split("/").pop() || "photo.jpg",
       };
       setFile({ uri });
-      onFileSelect(fileData);
+      onFileSelect({ uri });
     }
   };
 
   return (
     <View className="items-center my-5">
       <View className="w-[150px] aspect-square rounded-full border border-[#ccc] items-center justify-center bg-neutral-100">
-        {file ? (
+        {file?.uri ? (
           <Image
             source={{ uri: file.uri }}
             className="w-full h-full rounded-full"
