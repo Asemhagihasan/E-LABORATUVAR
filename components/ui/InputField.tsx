@@ -16,7 +16,7 @@ const InputField = ({
   onChangeText,
   onBlur,
   placeholder,
-  icon: Icon,
+  icon,
   secureTextEntry = false,
   containerStyle,
   inputStyle,
@@ -41,16 +41,15 @@ const InputField = ({
             </Text>
           )}
           <View
-            className={`flex flex-row justify-start items-center gap-4 rounded-xl border border-neutral-300 p-2.5 shadow-black ${
+            className={`flex flex-row justify-between items-center gap-4 rounded-xl border w-full border-neutral-300 p-2.5 shadow-black ${
               disabled ? "bg-neutral-100" : "bg-white"
             } ${containerStyle}`}
           >
-            {Icon && <Icon />}
             <TextInput
               value={value}
               onChangeText={onChangeText}
               onBlur={onBlur}
-              className={`font-semibold text-lg text-left text-neutral-950 w-full grow disabled:bg-neutral-500  ${inputStyle}`}
+              className={`font-semibold text-lg text-left text-neutral-950 w-[90%] relative disabled:bg-neutral-500 ${inputStyle}`}
               editable={!disabled}
               placeholder={placeholder}
               secureTextEntry={secureTextEntry}
@@ -58,6 +57,7 @@ const InputField = ({
               defaultValue={defaultValue}
               {...props}
             />
+            <Text className="absolute right-4"> {icon && icon}</Text>
           </View>
           {errorMessage && (
             <Text className="text-base text-red-500 mt-2">{errorMessage}</Text>

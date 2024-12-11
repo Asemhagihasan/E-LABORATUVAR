@@ -1,6 +1,5 @@
 import { SignInProps, SignUpProps } from "@/types";
 import { supabase } from "../supabase";
-import { genders } from "@/constants";
 
 export async function signUp(formData: SignUpProps) {
   const { data: authUser, error } = await supabase.auth.signUp({
@@ -18,9 +17,10 @@ export async function signUp(formData: SignUpProps) {
 
   const { error: userError } = await supabase.from("profiles").insert({
     user_id: authUser?.user?.id,
-    full_name: formData.fullName,
-    birth_date: formData.birthDate,
-    tc: formData.tc,
+    fullName: formData.fullName,
+    birthDate: formData.birthDate,
+    nationalId: formData.nationalId,
+    email: formData.email,
   });
   if (userError) await supabase.auth.admin.deleteUser(authUser?.user?.id!);
 
@@ -58,9 +58,22 @@ export async function getCurrentUser() {
   return data?.user;
 }
 
+export async function getCurrentUserProfile(userId: string) {
+  const user = await getCurrentUser();
+  if (user?.id !== userId) return null;
+
+  const { error, data } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("user_id", userId)
+    .single();
+  if (error) throw new Error(error.message);
+
+  return data;
+}
+
 export async function updateCurrentUser(formData: any) {
   await new Promise((resolve) => setTimeout(resolve, 1000));
-
   if (formData.newPassword) {
     const { error } = await supabase.auth.updateUser({
       email: formData.email,
@@ -68,15 +81,18 @@ export async function updateCurrentUser(formData: any) {
     });
     if (error) throw new Error(`Auth update failed: ${error.message}`);
   }
+  console.log("formData", formData);
 
   const { data, error } = await supabase
     .from("profiles")
     .update({
-      full_name: formData.fullName,
-      birth_date: formData.birthDate,
+      user_id: formData.userId,
+      fullName: formData.fullName,
+      birthDate: formData.birthDate,
       gender: formData.gender,
       address: formData.address,
       phone: formData.phone,
+      avatar: formData.avatar,
     })
     .eq("user_id", formData.userId);
 

@@ -14,18 +14,17 @@ const CustomSelect = ({
   containerStyle,
   listItemContainerStyle,
   errorMessage,
-  defaultValue,
   disabled = false,
 }: CustomSelectProps) => {
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState(dropdownItems || []);
-  const [selectedValue, setSelectedValue] = useState(defaultValue || value); // Set default value if provided
-  useEffect(() => {
-    if (defaultValue) {
-      setSelectedValue(defaultValue); // Update selected value when default changes
-      onChange(defaultValue); // Ensure form control is updated
-    }
-  }, [defaultValue, onChange]);
+  const [selectedValue, setSelectedValue] = useState(value); // Set default value if provided
+  // useEffect(() => {
+  //   if (defaultValue) {
+  //     setSelectedValue(defaultValue); // Update selected value when default changes
+  //     onChange(defaultValue); // Ensure form control is updated
+  //   }
+  // }, [defaultValue, onChange]);
 
   return (
     <View className="-mt-4">
@@ -47,7 +46,7 @@ const CustomSelect = ({
         }}
         disabled={disabled}
         setItems={setItems} // Function to update items list
-        placeholder={placeholder} // Placeholder text
+        placeholder={value || placeholder} // Placeholder text
         style={{
           width: "100%",
           height: 66,
@@ -61,7 +60,7 @@ const CustomSelect = ({
         placeholderStyle={{
           color: "#0a0a0a",
           fontSize: 16,
-          fontWeight: "bold",
+          fontWeight: "500",
         }}
         listItemContainerStyle={{
           backgroundColor: "#fff",
@@ -70,7 +69,7 @@ const CustomSelect = ({
         labelStyle={{
           color: "#0a0a0a",
           fontSize: 16,
-          fontWeight: "bold",
+          fontWeight: "500",
         }}
       />
       <Text className="text-red-500 text-sm">{errorMessage}</Text>
