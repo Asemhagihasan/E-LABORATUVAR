@@ -1,8 +1,5 @@
 import { StyleProp, TextStyle, ViewStyle } from "react-native";
-import React from "react";
-import { FieldError } from "react-hook-form";
-import { UpdateProfileSchema } from "./schema";
-import { z } from "zod";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export interface InputFieldProps {
   label?: string;
@@ -92,4 +89,11 @@ export interface DatePickerFieldProps {
   inputStyle?: string;
   labelStyle?: string;
   disabled?: boolean;
+}
+
+export interface CardProps {
+  icon: keyof typeof MaterialIcons.glyphMap;
+  title: string;
+  containerColor: string;
+  pageName: string;
 }
