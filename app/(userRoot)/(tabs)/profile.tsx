@@ -78,7 +78,7 @@ const Profile = () => {
     resolver: zodResolver(UpdateProfileSchema),
     defaultValues: profile || {},
   });
-  console.log("errors", methods.formState.errors);
+
   useEffect(() => {
     if (profile) {
       methods.reset(profile); // Dynamically update form values when profile data is fetched

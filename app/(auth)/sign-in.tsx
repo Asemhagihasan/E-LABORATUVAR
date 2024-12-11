@@ -28,6 +28,10 @@ const SignIn = () => {
     setForm((prevForm) => ({ ...prevForm, password: text }));
   };
 
+  const redirectToUserPage = () => {
+    router.push("/(userRoot)/user-dashboard");
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-white">
       <ScrollView className="flex-1 pt-6">
@@ -91,6 +95,11 @@ const SignIn = () => {
             titleStyle="text-xl"
             disabled={isPending}
             onPress={handleSignIn}
+          />
+          <Button
+            title="User Page"
+            titleStyle="text-xl"
+            onPress={redirectToUserPage}
           />
           <View className="flex flex-row justify-center items-center mt-4">
             <Text className="text-neutral-500 font-medium">
