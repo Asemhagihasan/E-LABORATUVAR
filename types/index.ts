@@ -1,6 +1,8 @@
 import { StyleProp, TextStyle, ViewStyle } from "react-native";
 import React from "react";
 import { FieldError } from "react-hook-form";
+import { UpdateProfileSchema } from "./schema";
+import { z } from "zod";
 
 export interface InputFieldProps {
   label?: string;
@@ -8,7 +10,7 @@ export interface InputFieldProps {
   onChangeText?: (text: string) => void;
   onBlur?: () => void;
   placeholder?: string;
-  icon?: React.ComponentType<any>;
+  icon?: any;
   secureTextEntry?: boolean;
   containerStyle?: StyleProp<ViewStyle>;
   iconStyle?: StyleProp<TextStyle | ViewStyle>;
@@ -17,6 +19,7 @@ export interface InputFieldProps {
   keypoardType?: "default" | "email-address" | "numeric" | "phone-pad";
   errorMessage?: string;
   disabled?: boolean;
+  defaultValue?: string;
 }
 
 export interface ButtonProps {
@@ -56,7 +59,7 @@ export interface SignUpProps {
   password: string;
   birthDate?: string;
   fullName: string;
-  tc: string;
+  nationalId: string;
   role?: string;
 }
 

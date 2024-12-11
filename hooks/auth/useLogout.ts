@@ -6,7 +6,7 @@ export const useLogout = () => {
     mutationFn: () => logoutApi(),
     onSuccess: () => {
       console.log("Success");
-      router.replace("../(auth)/sign-in");
+      router.replace("../../(auth)/sign-in");
     },
   });
 

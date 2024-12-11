@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import InputField from "@/components/ui/InputField";
 import Button from "@/components/ui/Button";
-import { useLogin } from "@/hooks/useLogin";
+import { useLogin } from "@/hooks/auth/useLogin";
 import { router } from "expo-router";
 import Feather from "@expo/vector-icons/Feather";
 
@@ -64,23 +64,23 @@ const SignIn = () => {
               value={form.password}
               onChangeText={handlePasswordChange}
               secureTextEntry={!showPassword}
-              // icon={
-              //   showPassword ? (
-              //     <Feather
-              //       name="eye-off"
-              //       size={24}
-              //       color="black"
-              //       onPress={() => setShowPassword(!showPassword)}
-              //     />
-              //   ) : (
-              //     <Feather
-              //       name="eye"
-              //       size={24}
-              //       color="black"
-              //       onPress={() => setShowPassword(!showPassword)}
-              //     />
-              //   )
-              // }
+              icon={
+                showPassword ? (
+                  <Feather
+                    name="eye"
+                    size={24}
+                    color="#737373"
+                    onPress={() => setShowPassword(!showPassword)}
+                  />
+                ) : (
+                  <Feather
+                    name="eye-off"
+                    size={24}
+                    color="#737373"
+                    onPress={() => setShowPassword(!showPassword)}
+                  />
+                )
+              }
             />
           </View>
           <View className="flex mt-3">
