@@ -1,17 +1,31 @@
 import React from "react";
-import { Text, TouchableOpacity } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import { CardProps } from "@/types";
 
-const Card: React.FC<CardProps> = ({ icon, title, containerColor }) => {
+const Card: React.FC<CardProps> = ({
+  src,
+  description,
+  operation_name,
+  pageName,
+}) => {
   return (
-    <TouchableOpacity
-      //   onPress={onPress}
-      className={`w-11/12 p-4 my-2 rounded-lg shadow-md flex-row items-center ${containerColor}`}
+    <View
+      className={`w-60 border border-gray-200 rounded-lg shadow`}
+      style={{ overflow: "hidden" }}
     >
-      <MaterialIcons name={icon} size={32} color="#4A90E2" className="mr-4" />
-      <Text className="text-lg font-semibold text-gray-700">{title}</Text>
-    </TouchableOpacity>
+      <Image
+        source={{ uri: src }}
+        style={{ width: "100%", height: 100 }}
+        className="rounded-t-lg"
+      />
+
+      <View className="p-5">
+        <Text className="mb-3 font-normal text-gray-700">{description}</Text>
+        <TouchableOpacity className="inline-flex items-center px-3 py-2 text-sm font-medium text-center bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+          <Text className="text-white text-lg">{operation_name}</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 
