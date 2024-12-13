@@ -92,8 +92,8 @@ export interface DatePickerFieldProps {
 }
 
 export interface CardProps {
-  icon: keyof typeof MaterialIcons.glyphMap;
-  title: string;
-  containerColor: string;
-  pageName: string;
+  src: string;
+  description: string;
+  operation_name: string;
+  pageName?: string;
 }

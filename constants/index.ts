@@ -8,9 +8,10 @@ export const genders = [
 
 export const card_items: CardProps[] = [
   {
-    icon: "description",
-    title: "Create Guide",
-    containerColor: "bg-gray-100",
+    src: "../../assets/images/card_item_1.jpg",
+    description:
+      "Here are the biggest enterprise technology acquisitions of 2021 so",
+    operation_name: "Create Guide",
     pageName: "createGuide",
   },
 ];

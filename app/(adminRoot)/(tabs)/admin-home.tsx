@@ -1,6 +1,6 @@
 import Card from "@/components/admin-root/Card";
 import { card_items } from "@/constants";
-import { FlatList, SafeAreaView, ScrollView } from "react-native";
+import { FlatList, SafeAreaView, ScrollView, View } from "react-native";
 
 const AdminHome = () => {
   const handleCardPress = (action: string) => {
@@ -9,21 +9,22 @@ const AdminHome = () => {
   };
 
   return (
-    <SafeAreaView className="flex-1 items-center justify-center h-full bg-white">
-      <ScrollView contentContainerStyle={{ alignItems: "center" }}>
-        <FlatList
-          data={card_items}
-          renderItem={({ item }) => (
+    <SafeAreaView className="flex-1 bg-white p-4">
+      {card_items.map((item) => {
+        return (
+          <View
+            key={item.pageName}
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+          >
             <Card
-              icon={item.icon}
-              containerColor={item.containerColor}
-              title={item.title}
+              src={item.src}
+              description={item.description}
+              operation_name={item.operation_name}
               pageName={item.pageName}
             />
-          )}
-          keyExtractor={(item) => item.pageName}
-        />
-      </ScrollView>
+          </View>
+        );
+      })}
     </SafeAreaView>
   );
 };
