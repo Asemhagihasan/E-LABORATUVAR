@@ -1,5 +1,4 @@
 import { StyleProp, TextStyle, ViewStyle } from "react-native";
-import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 
 export interface InputFieldProps {
@@ -26,6 +25,10 @@ export interface ButtonProps {
   onPress?: () => void;
   disabled?: boolean;
   loading?: boolean;
+  rightIcon?: string;
+  leftIcon?: string;
+  rightIconColor?: string;
+  containerStyle?: string;
 }
 
 export declare interface CustomSelectProps {
@@ -95,6 +98,6 @@ export interface DatePickerFieldProps {
 export interface CardProps {
   icon: keyof typeof MaterialIcons.glyphMap;
   title: string;
-  containerColor: string;
-  pageName: string;
+  containerStyle?: string;
+  onPress?: () => void;
 }
