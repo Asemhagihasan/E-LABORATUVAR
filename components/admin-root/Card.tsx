@@ -3,11 +3,16 @@ import { Text, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { CardProps } from "@/types";
 
-const Card: React.FC<CardProps> = ({ icon, title, containerColor }) => {
+const Card: React.FC<CardProps> = ({
+  icon,
+  title,
+  containerStyle,
+  onPress,
+}) => {
   return (
     <TouchableOpacity
-      //   onPress={onPress}
-      className={`w-11/12 p-4 my-2 rounded-lg shadow-md flex-row items-center ${containerColor}`}
+      onPress={onPress}
+      className={`w-11/12 p-4 my-2 rounded-lg shadow-md flex-row items-center ${containerStyle}`}
     >
       <MaterialIcons name={icon} size={32} color="#4A90E2" className="mr-4" />
       <Text className="text-lg font-semibold text-gray-700">{title}</Text>

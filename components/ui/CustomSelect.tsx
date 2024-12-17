@@ -36,7 +36,7 @@ const CustomSelect = ({
       <DropDownPicker
         open={open} // Whether the dropdown is open
         value={selectedValue} // Current selected value
-        items={genders || []} // Items list
+        items={items || []} // Items list
         setOpen={setOpen} // Function to toggle dropdown
         setValue={(callback) => {
           const selected =
