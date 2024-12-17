@@ -26,7 +26,7 @@ const SignUp = () => {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
-    data.role = "user";
+    data.role = "admin";
     signUp(data as SignUpProps);
   };
 
