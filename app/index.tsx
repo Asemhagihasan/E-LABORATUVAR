@@ -1,19 +1,15 @@
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
-import React, { useEffect } from "react";
-import { Redirect, router } from "expo-router";
-import { useUser } from "@/hooks/useUser";
+import { View } from "react-native";
+import React from "react";
+import { Redirect } from "expo-router";
+import { useUser } from "@/hooks/auth/useUser";
+import Loader from "@/components/ui/Loader";
 
 const index = () => {
   const { isLoadingUser, isAuthonticated, metaData, user } = useUser();
 
   const role = metaData?.role;
 
-  if (isLoadingUser)
-    return (
-      <View className="h-full bg-white flex-1 items-center justify-center">
-        <ActivityIndicator size="large" color="#1D61E7" />
-      </View>
-    );
+  if (isLoadingUser) return <Loader />;
 
   return isAuthonticated ? (
     role === "user" ? (

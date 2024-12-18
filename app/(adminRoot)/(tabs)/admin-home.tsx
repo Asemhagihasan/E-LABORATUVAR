@@ -1,6 +1,7 @@
 import Card from "@/components/admin-root/Card";
 import { card_items } from "@/constants";
-import { FlatList, SafeAreaView, ScrollView, View } from "react-native";
+import { FlatList, ScrollView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const AdminHome = () => {
   const handleCardPress = (action: string) => {

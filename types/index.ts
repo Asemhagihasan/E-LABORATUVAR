@@ -1,5 +1,4 @@
 import { StyleProp, TextStyle, ViewStyle } from "react-native";
-import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 
 export interface InputFieldProps {
@@ -8,7 +7,7 @@ export interface InputFieldProps {
   onChangeText?: (text: string) => void;
   onBlur?: () => void;
   placeholder?: string;
-  icon?: React.ComponentType<any>;
+  icon?: any;
   secureTextEntry?: boolean;
   containerStyle?: StyleProp<ViewStyle>;
   iconStyle?: StyleProp<TextStyle | ViewStyle>;
@@ -17,6 +16,7 @@ export interface InputFieldProps {
   keypoardType?: "default" | "email-address" | "numeric" | "phone-pad";
   errorMessage?: string;
   disabled?: boolean;
+  defaultValue?: string;
 }
 
 export interface ButtonProps {
@@ -25,6 +25,10 @@ export interface ButtonProps {
   onPress?: () => void;
   disabled?: boolean;
   loading?: boolean;
+  rightIcon?: string;
+  leftIcon?: string;
+  rightIconColor?: string;
+  containerStyle?: string;
 }
 
 export declare interface CustomSelectProps {
@@ -56,7 +60,7 @@ export interface SignUpProps {
   password: string;
   birthDate?: string;
   fullName: string;
-  tc: string;
+  nationalId: string;
   role?: string;
 }
 
