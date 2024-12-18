@@ -202,20 +202,18 @@ export default function CreateGuide() {
           </FormProvider>
         </Modal>
       </Portal>
-      <Card
+      {/* <Card
         title="Add new guide"
         icon="description"
         containerStyle="bg-gray-100 w-[200px] border border-gray-200 shadow-md"
         onPress={showModal}
+      /> */}
+      <Button
+        title="Add new guide"
+        onPress={showModal}
+        containerStyle="!w-[200px] bg-gray-100 border border-gray-200 shadow-md gap-4"
+        leftIcon="clipboard-outline"
       />
     </>
   );
 }
-const styles = StyleSheet.create({
-  menuItems: {
-    backgroundColor: "#FFFFFF",
-    borderBottomWidth: 1,
-    borderBottomColor: "#F0F0F0", // Optional: Add separator
-    paddingBottom: 0,
-  },
-});
