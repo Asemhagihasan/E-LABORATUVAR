@@ -23,7 +23,7 @@ const Button = ({
       {...props}
     >
       {leftIcon && <Icon source={leftIcon} size={24} color={rightIconColor} />}
-      <Text className={`text-lg font-bold text-white ${titleStyle}`}>
+      <Text className={`text-lg font-bold text-neutral-700 ${titleStyle}`}>
         {title}
       </Text>
       {rightIcon && (

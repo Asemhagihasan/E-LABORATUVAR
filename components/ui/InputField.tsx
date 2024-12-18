@@ -22,7 +22,7 @@ const InputField = ({
   inputStyle,
   labelStyle,
   disabled = false,
-  keypoardType = "default",
+  keyboardType = "default",
   defaultValue,
   errorMessage,
   ...props
@@ -53,7 +53,7 @@ const InputField = ({
               editable={!disabled}
               placeholder={placeholder}
               secureTextEntry={secureTextEntry}
-              keyboardType={keypoardType}
+              keyboardType={keyboardType}
               defaultValue={defaultValue}
               {...props}
             />
