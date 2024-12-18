@@ -8,10 +8,24 @@ export const genders = [
 
 export const card_items: CardProps[] = [
   {
-    src: "../../assets/images/card_item_1.jpg",
-    description:
-      "Here are the biggest enterprise technology acquisitions of 2021 so",
+    src: require("@/assets/images/card_item_1.png"),
+    description: "Create and personalize a guide to suit your needs.",
     operation_name: "Create Guide",
-    pageName: "createGuide",
+    pageName: "CreateGuide",
+    background_color: "bg-green",
+  },
+  {
+    src: require("@/assets/images/card_item_2.png"),
+    description: "Find and explore a variety of trusted doctors.",
+    operation_name: "Find Doctors",
+    pageName: "FindDoctors",
+    background_color: "bg-blue",
+  },
+  {
+    src: require("@/assets/images/card_item_3.png"),
+    description: "Easily access and review patient results in detail.",
+    operation_name: "Patient Results",
+    pageName: "PatientResults",
+    background_color: "bg-red",
   },
 ];
