@@ -10,7 +10,20 @@ export const card_items: CardProps[] = [
   {
     icon: "description",
     title: "Create Guide",
-    containerColor: "bg-gray-100",
-    pageName: "createGuide",
+  },
+];
+
+export const ageUnits = [
+  {
+    label: "Years",
+    value: "years",
+  },
+  {
+    label: "Months",
+    value: "months",
+  },
+  {
+    label: "Days",
+    value: "days",
   },
 ];

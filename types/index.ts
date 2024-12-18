@@ -9,11 +9,11 @@ export interface InputFieldProps {
   placeholder?: string;
   icon?: any;
   secureTextEntry?: boolean;
-  containerStyle?: StyleProp<ViewStyle>;
+  containerStyle?: string;
   iconStyle?: StyleProp<TextStyle | ViewStyle>;
-  labelStyle?: StyleProp<TextStyle>;
+  labelStyle?: string;
   inputStyle?: StyleProp<TextStyle>;
-  keypoardType?: "default" | "email-address" | "numeric" | "phone-pad";
+  keyboardType?: "default" | "email-address" | "numeric" | "phone-pad";
   errorMessage?: string;
   disabled?: boolean;
   defaultValue?: string;
@@ -100,4 +100,33 @@ export interface CardProps {
   title: string;
   containerStyle?: string;
   onPress?: () => void;
+}
+
+export interface GuidesTableProps {
+  guides?: any[];
+  selectedAge: AgeProps | null;
+}
+
+export interface AgeProps {
+  value: {
+    minAge: number;
+    maxAge: number;
+    ageUnit: string;
+  };
+  label: string;
+}
+
+export interface Guide {
+  type: {
+    value: string;
+    label: string;
+  };
+  minValue: number;
+  maxValue: number;
+  minAge: number;
+  maxAge: number;
+  ageUnit: {
+    value: string;
+    label: string;
+  };
 }
