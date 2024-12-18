@@ -8,6 +8,20 @@ import "../styles/global.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ToastContainer from "@/components/ui/ToastContainer";
 import { PaperProvider } from "react-native-paper";
+
+import { DefaultTheme } from "react-native-paper";
+import { Text } from "react-native";
+
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: "#1D61E7", // Set your primary color
+    text: "#404040", // Set the text color
+    // You can override more colors here
+  },
+};
+
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -30,8 +44,8 @@ export default function RootLayout() {
 
   return (
     <>
-      <PaperProvider>
-        <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient}>
+        <PaperProvider theme={theme}>
           <Stack initialRouteName="index">
             <Stack.Screen name="index" options={{ headerShown: false }} />
             <Stack.Screen name="+not-found" options={{ headerShown: false }} />
@@ -41,8 +55,8 @@ export default function RootLayout() {
           </Stack>
           <StatusBar style="auto" />
           {/* <ToastContainer /> */}
-        </QueryClientProvider>
-      </PaperProvider>
+        </PaperProvider>
+      </QueryClientProvider>
     </>
   );
 }
