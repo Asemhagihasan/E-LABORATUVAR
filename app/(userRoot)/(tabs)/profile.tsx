@@ -1,5 +1,5 @@
 import { FlatList, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
   Controller,
@@ -9,41 +9,82 @@ import {
   useForm,
 } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UpdatePatientSchema } from "@/types/schema";
+import { UpdateProfileSchema } from "@/types/schema";
 import FileUpload from "@/components/ui/FileUpload";
 import InputField from "@/components/ui/InputField";
 import Button from "@/components/ui/Button";
 import CustomSelect from "@/components/ui/CustomSelect";
 import { genders } from "@/constants";
 import DatePickerField from "@/components/ui/DatePickerField";
-import { useUpdateUser } from "@/hooks/useUpdateUser";
-import { useUser } from "@/hooks/useUser";
+import { useUpdateProfile } from "@/hooks/profile/useUpdateProfile";
+import { useUser } from "@/hooks/auth/useUser";
+import { useGetProfile } from "@/hooks/profile/useGetProfile";
+import Loader from "@/components/ui/Loader";
+
+const formFields = [
+  {
+    name: "fullName",
+    label: "Full Name",
+    component: InputField,
+  },
+  {
+    name: "email",
+    label: "Email",
+    component: InputField,
+    disabled: true,
+  },
+  {
+    name: "newPassword",
+    label: "New Password (optional)",
+    component: InputField,
+    secureTextEntry: true,
+    placeholder: "*********",
+  },
+  {
+    name: "nationalId",
+    label: "National ID",
+    component: InputField,
+    disabled: true,
+  },
+  {
+    name: "phone",
+    label: "Phone Number",
+    component: InputField,
+    defaultValue: "",
+  },
+  {
+    name: "address",
+    label: "Address",
+    component: InputField,
+  },
+  {
+    name: "gender",
+    label: "Select your gender",
+    component: CustomSelect,
+    elementType: "select",
+    options: genders,
+  },
+];
 
 const Profile = () => {
-  const { user } = useUser();
-  const defaultValues = {
-    fullName: "Asem",
-    email: "asemhagi@gmail.com",
-    gender: "male",
-    birthDate: new Date().toISOString().split("T")[0], // Ensure ISO format
-    nationalId: "12345678910",
-    address: "Addis Ababa",
-    phone: "5526492954", // Add other fields with default values
-  };
-
-  const { updateUser, isPending } = useUpdateUser();
+  const { user, isLoadingUser } = useUser();
+  const { updateProfile, isPending: isUpdating } = useUpdateProfile();
+  const { profile, isPending: isLoadingProfile } = useGetProfile(user?.id!);
+  const [selectedImage, setSelectedImage] = useState<{ uri: string } | null>({
+    uri: profile?.avatar,
+  });
 
   const methods = useForm({
-    resolver: zodResolver(UpdatePatientSchema),
-    defaultValues: defaultValues,
+    resolver: zodResolver(UpdateProfileSchema),
+    defaultValues: profile || {},
   });
-  const handleFileSelect = (file: {
-    uri: string;
-    type: string;
-    name: string;
-  }) => {
-    console.log("Selected File:", file);
-  };
+
+  useEffect(() => {
+    if (profile) {
+      methods.reset(profile); // Dynamically update form values when profile data is fetched
+      setSelectedImage({ uri: profile.avatar });
+    }
+  }, [profile, methods.reset]);
 
   const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
     // Replace slashes with dashes to create an ISO-like format
@@ -52,55 +93,17 @@ const Profile = () => {
     const formattedData = {
       ...data,
       birthDate: new Date(birthDateString),
-      role: "user",
+      avatar: selectedImage?.uri,
       userId: user?.id,
     };
     // Send `formattedData` to Supabase or use it as needed
-    updateUser(formattedData);
+
+    updateProfile(formattedData);
   };
 
-  const formFields = [
-    {
-      name: "fullName",
-      label: "Full Name",
-      component: InputField,
-      defaultValue: "",
-    },
-    {
-      name: "email",
-      label: "Email",
-      component: InputField,
-      defaultValue: "",
-      disabled: true,
-    },
-    {
-      name: "nationalId",
-      label: "National ID",
-      component: InputField,
-      defaultValue: "",
-      disabled: true,
-    },
-    {
-      name: "phone",
-      label: "Phone Number",
-      component: InputField,
-      defaultValue: "",
-    },
-    {
-      name: "address",
-      label: "Address",
-      component: InputField,
-      defaultValue: "",
-    },
-    {
-      name: "gender",
-      label: "Select your gender",
-      component: CustomSelect,
-      elementType: "select",
-      options: genders,
-      defaultValue: "",
-    },
-  ];
+  if (isLoadingUser || isLoadingProfile) {
+    return <Loader />;
+  }
 
   return (
     <SafeAreaView className="flex-1 h-full bg-white">
@@ -116,7 +119,12 @@ const Profile = () => {
                 </Text>
               </View>
               <View className="p-5 justify-center items-center">
-                <FileUpload onFileSelect={handleFileSelect} />
+                <FileUpload
+                  defaultValue={{
+                    uri: selectedImage?.uri || "",
+                  }}
+                  onFileSelect={setSelectedImage}
+                />
               </View>
             </>
           )}
@@ -188,8 +196,8 @@ const Profile = () => {
               />
               <Button
                 onPress={methods.handleSubmit(onSubmit)}
-                title="Save Changes"
-                disabled={isPending}
+                title={`${isUpdating ? "Updating..." : "Update"}`}
+                disabled={isUpdating}
               />
             </View>
           )}

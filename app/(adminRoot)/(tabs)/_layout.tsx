@@ -1,7 +1,7 @@
 import { Tabs } from "expo-router";
 import React from "react";
 import { Text, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { TabsProps } from "@/types";
 
 export default function AdminLayout() {
@@ -46,6 +46,28 @@ export default function AdminLayout() {
                 icon={
                   <Ionicons
                     name="home"
+                    size={24}
+                    color={`${focused ? "#1D61E7" : "#CDCDE0"}`}
+                  />
+                }
+              />
+            );
+          },
+        }}
+      />
+      <Tabs.Screen
+        name="guides"
+        options={{
+          headerShown: false,
+          title: "Guides",
+          tabBarIcon: ({ color, focused }) => {
+            return (
+              <TabIcon
+                color={color}
+                name="Guides"
+                icon={
+                  <MaterialIcons
+                    name="description"
                     size={24}
                     color={`${focused ? "#1D61E7" : "#CDCDE0"}`}
                   />

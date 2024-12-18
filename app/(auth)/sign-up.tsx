@@ -14,19 +14,19 @@ import {
 } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SignUpSchema } from "@/types/schema";
-import { useSignUp } from "@/hooks/useSignUp";
+import { useSignUp } from "@/hooks/auth/useSignUp";
 import { SignUpProps } from "@/types";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Feather from "@expo/vector-icons/Feather";
 const SignUp = () => {
   const { signUp } = useSignUp();
-
+  const [showPassword, setShowPassword] = useState(false);
   const methods = useForm({
     resolver: zodResolver(SignUpSchema),
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
-    data.role = "user";
-    console.log("data", data);
+    data.role = "admin";
     signUp(data as SignUpProps);
   };
 
@@ -108,21 +108,38 @@ const SignUp = () => {
                       value={value}
                       onChangeText={onChange}
                       errorMessage={error?.message}
+                      icon={
+                        showPassword ? (
+                          <Feather
+                            name="eye"
+                            size={24}
+                            color="#737373"
+                            onPress={() => setShowPassword(!showPassword)}
+                          />
+                        ) : (
+                          <Feather
+                            name="eye-off"
+                            size={24}
+                            color="#737373"
+                            onPress={() => setShowPassword(!showPassword)}
+                          />
+                        )
+                      }
                     />
                   );
                 }}
               />
               <Controller
                 control={methods.control}
-                name="tc"
+                name="nationalId"
                 render={({
                   field: { value, onChange },
                   fieldState: { error },
                 }) => {
                   return (
                     <InputField
-                      label="Tc"
-                      placeholder="Enter your Tc"
+                      label="nationalId"
+                      placeholder="Enter your nationalId"
                       keypoardType="numeric"
                       value={value}
                       onChangeText={onChange}
@@ -131,13 +148,6 @@ const SignUp = () => {
                   );
                 }}
               />
-
-              {/* <DatePickerField
-            label="Date of Birth"
-            placeholder="Select your date of birth"
-            value={selectedDate}
-            onDateChange={(date) => setSelectedDate(date)}
-          /> */}
             </View>
             <Button
               title={"Sign Up"}
