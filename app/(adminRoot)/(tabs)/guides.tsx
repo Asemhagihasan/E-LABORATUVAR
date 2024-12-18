@@ -29,7 +29,7 @@ const Guides = () => {
           <Text className="text-2xl text-neutral-900 font-bold">
             Guides mangmaent
           </Text>
-          <View className="flex-row mt-4 items-center justify-between">
+          <View className="flex-row mt-4 items-end justify-between">
             <CreateGuide />
             <GuideTypes
               selectedType={selectedType}
