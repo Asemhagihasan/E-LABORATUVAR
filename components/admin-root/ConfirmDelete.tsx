@@ -23,13 +23,13 @@ const ConfirmDelete = ({
             <Button
               title="Confirm"
               onPress={confirmDelete}
-              containerStyle="bg-red-500 w-1/2"
+              containerStyle="bg-red-500 !w-1/2"
               titleStyle="text-white"
             />
             <Button
               title="Cancel"
               onPress={() => setIsDeleting(false)}
-              containerStyle="bg-gray-300 w-1/2"
+              containerStyle="bg-gray-300 !w-1/2"
             />
           </View>
         </View>

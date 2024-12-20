@@ -1,12 +1,6 @@
 import { ScrollView, Text, View } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Menu } from "react-native-paper";
-import { useGetGuides } from "@/hooks/guides/useGetGuides";
-import { StyleSheet } from "react-native";
-import { useGetGuideTypes } from "@/hooks/guides/useGetGuidetypes";
-import Button from "@/components/ui/Button";
-import { useGetGuideAgeRange } from "@/hooks/guides/useGetGuideAgeRange";
 import CreateGuide from "@/components/admin-root/CreateGuide";
 import { AgeProps } from "@/types";
 import GuidesTable from "@/components/admin-root/GuidesTable";
@@ -20,8 +14,6 @@ const Guides = () => {
     value: "IgA",
   });
   const [selectedAge, setSelectedAge] = useState<AgeProps | null>(null);
-
-  const { guides } = useGetGuides(selectedType.value);
 
   return (
     <SafeAreaView className="flex-1 bg-white">
@@ -44,7 +36,10 @@ const Guides = () => {
             selectedAge={selectedAge}
             setSelectedAge={setSelectedAge}
           />
-          <GuidesTable guides={guides} selectedAge={selectedAge} />
+          <GuidesTable
+            selectedType={selectedType.value}
+            selectedAge={selectedAge}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

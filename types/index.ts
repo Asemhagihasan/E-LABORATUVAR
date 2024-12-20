@@ -103,7 +103,7 @@ export interface CardProps {
 }
 
 export interface GuidesTableProps {
-  guides?: any[];
+  selectedType: string;
   selectedAge: AgeProps | null;
 }
 
