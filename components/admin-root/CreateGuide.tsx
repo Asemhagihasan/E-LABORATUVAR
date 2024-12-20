@@ -1,17 +1,10 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
-import { Modal, Portal, Menu } from "react-native-paper";
-import Card from "./Card";
+import { Modal, Portal } from "react-native-paper";
 import InputField from "../ui/InputField";
 import Button from "../ui/Button";
-import { useGetGuideTypes } from "@/hooks/guides/useGetGuidetypes";
-import {
-  Controller,
-  FieldValues,
-  FormProvider,
-  SubmitHandler,
-  useForm,
-} from "react-hook-form";
+
+import { Controller, FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { GuideSchema } from "@/types/schema";
 import { z } from "zod";
