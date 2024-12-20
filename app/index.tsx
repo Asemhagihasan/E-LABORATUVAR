@@ -15,7 +15,7 @@ const index = () => {
     role === "user" ? (
       <Redirect href={`./(userRoot)/(tabs)/home`} /> // redirect to user dashboard
     ) : (
-      <Redirect href={`./(adminRoot)/(tabs)/admin-home`} /> // redirect to admin dashboard (not create yet)
+      <Redirect href={`./(adminRoot)/(home)/home`} /> // redirect to admin dashboard (not create yet)
     )
   ) : (
     <Redirect href="./(auth)/sign-in" />
