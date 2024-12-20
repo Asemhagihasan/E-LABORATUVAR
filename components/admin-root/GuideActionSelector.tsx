@@ -1,12 +1,15 @@
 import { View, StyleSheet, Text } from "react-native";
 import { useState } from "react";
 import { Menu, IconButton, Portal, Modal } from "react-native-paper";
-import Button from "./Button";
+import Button from "../ui/Button";
 import { useDeleteGuide } from "@/hooks/guides/useDeleteGuide";
+import ConfirmDelete from "./ConfirmDelete";
+import UpdateGuide from "./UpdateGuide";
 
 const GuideActionSelector = ({ guide }: { guide: any }) => {
-  const [visible, setVisible] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
   const { deleteGuide } = useDeleteGuide();
 
   const confirmDelete = () => {
@@ -18,21 +21,21 @@ const GuideActionSelector = ({ guide }: { guide: any }) => {
   return (
     <View>
       <Menu
-        visible={visible}
-        onDismiss={() => setVisible(false)}
+        visible={isMenuOpen}
+        onDismiss={() => setIsMenuOpen(false)}
         contentStyle={styles.menuItems}
         anchor={
           <IconButton
             icon="dots-vertical"
             size={24}
-            onPress={() => setVisible(true)}
+            onPress={() => setIsMenuOpen(true)}
             accessibilityLabel="Open guide actions menu"
           />
         }
       >
         <Menu.Item
           onPress={() => {
-            setVisible(false);
+            setIsMenuOpen(false);
             console.log("Update Guide");
           }}
           title="Update Guide"
@@ -41,7 +44,7 @@ const GuideActionSelector = ({ guide }: { guide: any }) => {
         />
         <Menu.Item
           onPress={() => {
-            setVisible(false);
+            setIsMenuOpen(false);
             setIsDeleting(true);
           }}
           title="Delete Guide"
@@ -49,26 +52,16 @@ const GuideActionSelector = ({ guide }: { guide: any }) => {
           style={styles.menuItems}
         />
       </Menu>
-      <Portal>
-        <Modal visible={isDeleting} onDismiss={() => setIsDeleting(false)}>
-          <View className="flex flex-col gap-2 w-80 mx-auto p-4 bg-white rounded-md">
-            <Text className="text-lg font-semibold text-neutral-700 text-center">
-              Are you sure you want to delete this guide?
-            </Text>
-            <View className="flex flex-col gap-4"></View>
-            <Button
-              title="Confirm"
-              onPress={confirmDelete}
-              containerStyle="bg-red-500"
-            />
-            <Button
-              title="Cancel"
-              onPress={() => setIsDeleting(false)}
-              containerStyle="bg-gray-300 !mt-0"
-            />
-          </View>
-        </Modal>
-      </Portal>
+      <ConfirmDelete
+        confirmDelete={confirmDelete}
+        isDeleting={isDeleting}
+        setIsDeleting={setIsDeleting}
+      />
+      <UpdateGuide
+        isUpdating={isUpdating}
+        setIsUpdating={setIsUpdating}
+        guide={guide}
+      />
     </View>
   );
 };

@@ -78,6 +78,28 @@ export default function AdminLayout() {
         }}
       />
       <Tabs.Screen
+        name="patients"
+        options={{
+          headerShown: false,
+          title: "Patients",
+          tabBarIcon: ({ color, focused }) => {
+            return (
+              <TabIcon
+                color={color}
+                name="Patients"
+                icon={
+                  <MaterialIcons
+                    name="people"
+                    size={24}
+                    color={`${focused ? "#1D61E7" : "#CDCDE0"}`}
+                  />
+                }
+              />
+            );
+          },
+        }}
+      />
+      <Tabs.Screen
         name="profile"
         options={{
           headerShown: false,

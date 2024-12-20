@@ -1,8 +1,7 @@
-import { DataTable, IconButton } from "react-native-paper";
+import { DataTable } from "react-native-paper";
 import React, { useEffect, useState } from "react";
 import { GuidesTableProps } from "@/types";
-import { Text, View } from "react-native";
-import GuideActionSelector from "../ui/GuideActionSelector";
+import GuideActionSelector from "./GuideActionSelector";
 
 const GuidesTable = ({ guides, selectedAge }: GuidesTableProps) => {
   const [page, setPage] = useState(0);

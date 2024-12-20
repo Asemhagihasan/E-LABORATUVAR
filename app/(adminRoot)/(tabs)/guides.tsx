@@ -12,6 +12,7 @@ import { AgeProps } from "@/types";
 import GuidesTable from "@/components/admin-root/GuidesTable";
 import AgeRangeFilter from "@/components/admin-root/AgeRangeFilter";
 import GuideTypes from "@/components/admin-root/GuideTypes";
+import GoBack from "@/components/ui/GoBack";
 
 const Guides = () => {
   const [selectedType, setSelectedType] = useState({
@@ -25,11 +26,12 @@ const Guides = () => {
   return (
     <SafeAreaView className="flex-1 bg-white">
       <ScrollView>
-        <View className="py-4 px-4 gap-4">
-          <Text className="text-2xl text-neutral-900 font-bold">
+        <View className="px-6 gap-4">
+          <GoBack />
+          <Text className="text-2xl text-neutral-900 font-bold text-center -mt-6">
             Guides mangmaent
           </Text>
-          <View className="flex-row mt-4 items-end justify-between">
+          <View className="flex-row items-end justify-between">
             <CreateGuide />
             <GuideTypes
               selectedType={selectedType}

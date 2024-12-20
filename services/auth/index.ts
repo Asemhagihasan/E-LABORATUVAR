@@ -7,7 +7,7 @@ export async function signUp(formData: SignUpProps) {
     password: formData.password,
     options: {
       data: {
-        role: formData?.role || "user",
+        role: formData.role || "user",
       },
     },
   });
@@ -21,6 +21,7 @@ export async function signUp(formData: SignUpProps) {
     birthDate: formData.birthDate,
     nationalId: formData.nationalId,
     email: formData.email,
+    role: formData.role || "user",
   });
   if (userError) await supabase.auth.admin.deleteUser(authUser?.user?.id!);
 
@@ -61,14 +62,15 @@ export async function getCurrentUser() {
 export async function getCurrentUserProfile(userId: string) {
   const user = await getCurrentUser();
   if (user?.id !== userId) return null;
+  console.log("user", user.id);
 
   const { error, data } = await supabase
     .from("profiles")
     .select("*")
-    .eq("user_id", userId)
+    .eq("user_id", user.id)
     .single();
   if (error) throw new Error(error.message);
-
+  console.log("data", data);
   return data;
 }
 
