@@ -2,13 +2,18 @@ import { DataTable } from "react-native-paper";
 import React, { useEffect, useState } from "react";
 import { GuidesTableProps } from "@/types";
 import GuideActionSelector from "./GuideActionSelector";
+import { useGetGuides } from "@/hooks/guides/useGetGuides";
+import Loader from "../ui/Loader";
+import { Text } from "react-native";
 
-const GuidesTable = ({ guides, selectedAge }: GuidesTableProps) => {
+const GuidesTable = ({ selectedAge, selectedType }: GuidesTableProps) => {
   const [page, setPage] = useState(0);
   const [numberOfItemsPerPageList] = useState([5, 10, 15]);
   const [itemsPerPage, onItemsPerPageChange] = useState(
     numberOfItemsPerPageList[0]
   );
+
+  const { guides, isLoading } = useGetGuides(selectedType);
 
   const filteredGuides = (guides || []).filter((guide) => {
     if (!selectedAge) return true; // If no filter is selected, show all guides
@@ -26,6 +31,18 @@ const GuidesTable = ({ guides, selectedAge }: GuidesTableProps) => {
   useEffect(() => {
     setPage(0);
   }, [itemsPerPage]);
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  if (filteredGuides?.length === 0 || !filteredGuides) {
+    return (
+      <Text className="text-center text-neutral-500 text-2xl font-semibold mt-4">
+        No guides available.
+      </Text>
+    );
+  }
 
   return (
     <DataTable>
