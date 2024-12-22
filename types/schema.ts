@@ -45,6 +45,7 @@ const addressSchema = z
   .max(50, "Address must be less than 50 characters");
 
 const birthDateSchema = z.string(); // Additional validation can be added if needed
+const optionSchema = z.object({ label: z.string(), value: z.string() });
 
 // Create SignUpSchema
 export const SignUpSchema = z.object({
@@ -64,3 +65,24 @@ export const UpdateProfileSchema = z.object({
   birthDate: birthDateSchema,
   phone: phoneSchema,
 });
+
+export const GuideSchema = z
+  .object({
+    type: optionSchema,
+    minValue: z.number().min(0, "Min value must be at least 0"),
+    maxValue: z.number().min(0, "Max value must be at least 0"),
+    minAge: z.number().min(0, "Min age must be at least 0"),
+    maxAge: z
+      .number()
+      .min(1, "Max age must be at least 1")
+      .max(130, "Max age cannot be more than 130"),
+    ageUnit: optionSchema,
+  })
+  .refine((data) => data.maxAge > data.minAge, {
+    path: ["maxAge"], // Point to the field causing the issue
+    message: "Max age must be greater than min age",
+  })
+  .refine((data) => data.maxValue > data.minValue, {
+    path: ["maxValue"], // Point to the field causing the issue
+    message: "Max value must be greater than min value",
+  });

@@ -6,6 +6,5 @@ export const useGetProfile = (userId: string) => {
     queryKey: ["profile"],
     queryFn: () => getCurrentUserProfile(userId!),
   });
-
   return { profile, isPending };
 };
