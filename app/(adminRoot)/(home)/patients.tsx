@@ -5,7 +5,6 @@ import GoBack from "@/components/ui/GoBack";
 import PatientsTable from "@/components/admin-root/PatientsTable";
 import { Searchbar } from "react-native-paper";
 import { TouchableWithoutFeedback } from "react-native";
-import { usePathname } from "expo-router";
 
 const patients = () => {
   const [searchQuery, setSearchQuery] = useState("");

@@ -1,4 +1,9 @@
-import { StyleProp, TextStyle, ViewStyle } from "react-native";
+import {
+  ImageSourcePropType,
+  StyleProp,
+  TextStyle,
+  ViewStyle,
+} from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
 export interface InputFieldProps {
@@ -96,10 +101,12 @@ export interface DatePickerFieldProps {
 }
 
 export interface CardProps {
-  icon: keyof typeof MaterialIcons.glyphMap;
-  title: string;
-  containerStyle?: string;
-  onPress?: () => void;
+  itemKey?: string;
+  pageName?: string;
+  description: string;
+  operation_name: string;
+  background_color: string;
+  src: ImageSourcePropType;
 }
 
 export interface GuidesTableProps {
