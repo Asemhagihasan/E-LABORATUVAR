@@ -5,6 +5,7 @@ import GuideActionSelector from "./GuideActionSelector";
 import { useGetGuides } from "@/hooks/guides/useGetGuides";
 import Loader from "../ui/Loader";
 import { Text } from "react-native";
+import { convertToGramsPerL } from "@/utils/helpers";
 
 const GuidesTable = ({ selectedAge, selectedType }: GuidesTableProps) => {
   const [page, setPage] = useState(0);
@@ -35,6 +36,8 @@ const GuidesTable = ({ selectedAge, selectedType }: GuidesTableProps) => {
   if (isLoading) {
     return <Loader />;
   }
+
+  console.log(convertToGramsPerL(1));
 
   if (filteredGuides?.length === 0 || !filteredGuides) {
     return (
@@ -68,8 +71,12 @@ const GuidesTable = ({ selectedAge, selectedType }: GuidesTableProps) => {
         return (
           <DataTable.Row key={guide.id} className="flex-row gap-2">
             <DataTable.Cell>{`${minAge} - ${maxAge} ${unit[0]}`}</DataTable.Cell>
-            <DataTable.Cell numeric>{minValue}</DataTable.Cell>
-            <DataTable.Cell numeric>{maxValue}</DataTable.Cell>
+            <DataTable.Cell numeric>
+              {convertToGramsPerL(minValue)}
+            </DataTable.Cell>
+            <DataTable.Cell numeric>
+              {convertToGramsPerL(maxValue)}
+            </DataTable.Cell>
             <DataTable.Cell className="flex justify-end">{type}</DataTable.Cell>
             <DataTable.Cell className="flex justify-end">
               <GuideActionSelector guide={guide} />
