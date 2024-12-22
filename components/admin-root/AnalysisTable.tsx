@@ -13,16 +13,27 @@ const CustomCell = ({
   label?: any;
   subLabel?: string;
 }) => (
-  <View className="flex flex-col items-center">
-    <Text className="text-gray-600 text-sm">{label || "-"}</Text>
-    {subLabel && <Text className="text-gray-500 text-xs">{subLabel}</Text>}
-  </View>
+  console.log("label", label),
+  (
+    <View className="flex flex-col items-center">
+      <Text className="text-gray-600 text-sm">{label || "-"}</Text>
+      {subLabel && <Text className="text-gray-500 text-xs">{subLabel}</Text>}
+    </View>
+  )
 );
 
-const AnalysisTable = ({ patientId }: { patientId: string }) => {
-  const { analysis, isLoading } = useGetAnalysisByPatientId(patientId);
-  const { previousresults, isPreviousResultsLoading } =
-    useGetPreviousResults(patientId);
+const AnalysisTable = ({
+  patientId,
+  refetch,
+}: {
+  patientId: string;
+  refetch: boolean;
+}) => {
+  const { analysis, isLoading } = useGetAnalysisByPatientId(patientId, refetch);
+  const { previousresults, isPreviousResultsLoading } = useGetPreviousResults(
+    patientId,
+    refetch
+  );
 
   // Helper function to get previous results for a specific analysis_id
   const getPreviousResultsForAnalysis = (analysisId: number) => {
@@ -57,7 +68,7 @@ const AnalysisTable = ({ patientId }: { patientId: string }) => {
 
   if (!analysis || analysis.length === 0)
     return (
-      <Text className="text-center font-semibold text-2xl text-neutral-500">
+      <Text className="text-center font-semibold text-2xl text-neutral-500 mt-6">
         No analysis found for this patient
       </Text>
     );

@@ -6,15 +6,19 @@ import Loader from "../ui/Loader";
 import { useGetPatientById } from "@/hooks/patients/useGetPatientById";
 
 const PatientInfoRow = ({ label, value }: { label: string; value: string }) => (
-  <View className="flex-row items-center justify-between w-[220px]">
+  <View className="flex-row items-center justify-between w-[300px]">
     <Text className="text-lg text-neutral-700 font-bold">{label}:</Text>
     <Text className="text-lg text-neutral-700 font-semibold">{value}</Text>
   </View>
 );
 
-const PatientInformation = ({ patientId }: { patientId: string }) => {
-  const { patient, isLoading } = useGetPatientById(patientId as string);
-
+const PatientInformation = ({
+  patient,
+  isLoading,
+}: {
+  patient: any;
+  isLoading: boolean;
+}) => {
   if (isLoading) return <Loader />;
   return (
     <View>
@@ -32,7 +36,9 @@ const PatientInformation = ({ patientId }: { patientId: string }) => {
           label="Birth date"
           value={
             patient?.birthDate
-              ? `${patient.birthDate} / ${calculateAge(patient.birthDate)}`
+              ? `${patient.birthDate} / ${
+                  calculateAge(patient.birthDate).label
+                }`
               : "N/A"
           }
         />

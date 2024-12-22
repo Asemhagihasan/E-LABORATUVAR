@@ -12,6 +12,7 @@ const Button = ({
   rightIcon,
   leftIcon,
   rightIconColor = "white",
+  leftIconColor = "#1D61E7",
   ...props
 }: ButtonProps) => {
   return (
@@ -22,7 +23,7 @@ const Button = ({
       className={`w-full mt-6 p-5 rounded-md flex flex-row justify-center items-center bg-[##1D61E7] shadow-md shadow-neutral-400/70 disabled:opacity-75 gap-2 ${containerStyle}`}
       {...props}
     >
-      {leftIcon && <Icon source={leftIcon} size={24} color="#1D61E7" />}
+      {leftIcon && <Icon source={leftIcon} size={24} color={leftIconColor} />}
       <Text className={`text-lg font-bold text-neutral-700 ${titleStyle}`}>
         {title}
       </Text>

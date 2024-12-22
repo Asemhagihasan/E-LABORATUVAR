@@ -60,7 +60,7 @@ export default function CreateGuide() {
         <Modal
           visible={visible}
           onDismiss={hideModal}
-          contentContainerStyle={containerStyle}
+          contentContainerStyle={containerStyle as any}
         >
           <FormProvider {...methods}>
             <ScrollView className="p-4 bg-white rounded-md flex-1">
