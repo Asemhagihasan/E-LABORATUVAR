@@ -28,6 +28,7 @@ export interface ButtonProps {
   rightIcon?: string;
   leftIcon?: string;
   rightIconColor?: string;
+  leftIconColor?: string;
   containerStyle?: string;
 }
 
