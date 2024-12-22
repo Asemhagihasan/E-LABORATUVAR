@@ -27,5 +27,22 @@ export const card_items: CardProps[] = [
     operation_name: "Patient Results",
     pageName: "PatientResults",
     background_color: "bg-red",
+    icon: "description",
+    title: "Create Guide",
+  },
+];
+
+export const ageUnits = [
+  {
+    label: "Years",
+    value: "years",
+  },
+  {
+    label: "Months",
+    value: "months",
+  },
+  {
+    label: "Days",
+    value: "days",
   },
 ];
