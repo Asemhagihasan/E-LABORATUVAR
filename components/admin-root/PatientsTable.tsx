@@ -4,6 +4,7 @@ import { useGetPatients } from "@/hooks/patients/useGetPatients";
 import { DataTable, IconButton } from "react-native-paper";
 import Loader from "../ui/Loader";
 import { router, usePathname } from "expo-router";
+import { maskNationalId } from "@/utils/helpers";
 
 const PatientsTable = ({ searchQuery }: { searchQuery: string }) => {
   const pathName = usePathname();
@@ -39,10 +40,6 @@ const PatientsTable = ({ searchQuery }: { searchQuery: string }) => {
     setPage(0); // Reset to the first page when items per page changes
   }, [itemsPerPage]);
 
-  const nationalIdMask = (nationalId: string) => {
-    return nationalId.slice(0, 3) + "*****" + nationalId.slice(8, 11);
-  };
-
   if (isLoading) {
     return <Loader />;
   }
@@ -72,7 +69,7 @@ const PatientsTable = ({ searchQuery }: { searchQuery: string }) => {
           <DataTable.Row key={patient.id}>
             <DataTable.Cell>{patient.fullName}</DataTable.Cell>
             <DataTable.Cell numeric>
-              {nationalIdMask(patient.nationalId)}
+              {maskNationalId(patient.nationalId)}
             </DataTable.Cell>
             <DataTable.Cell className="flex justify-end">
               <IconButton
