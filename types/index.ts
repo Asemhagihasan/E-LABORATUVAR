@@ -101,7 +101,7 @@ export interface DatePickerFieldProps {
 }
 
 export interface CardProps {
-  key?: number;
+  itemKey?: string;
   pageName?: string;
   description: string;
   operation_name: string;

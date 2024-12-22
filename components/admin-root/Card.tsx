@@ -1,9 +1,9 @@
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { CardProps } from "@/types";
+import { router } from "expo-router";
 
 const Card: React.FC<CardProps> = ({
-  key,
   src,
   pageName,
   description,
@@ -12,7 +12,6 @@ const Card: React.FC<CardProps> = ({
 }) => {
   return (
     <View
-      key={key}
       style={{ overflow: "hidden" }}
       className={`w-52 border border-gray-200 rounded-lg shadow ${background_color}-200`}
     >
@@ -30,6 +29,9 @@ const Card: React.FC<CardProps> = ({
         </Text>
         <TouchableOpacity
           className={`inline-flex items-center px-3 py-2 text-sm font-semibold text-center ${background_color}-700 rounded-md`}
+          onPress={() => {
+            router.push(`./${pageName}/`);
+          }}
         >
           <Text className="text-white text-lg">{operation_name}</Text>
         </TouchableOpacity>
