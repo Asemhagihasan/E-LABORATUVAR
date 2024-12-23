@@ -195,12 +195,6 @@ export default function CreateGuide() {
           </FormProvider>
         </Modal>
       </Portal>
-      {/* <Card
-        title="Add new guide"
-        icon="description"
-        containerStyle="bg-gray-100 w-[200px] border border-gray-200 shadow-md"
-        onPress={showModal}
-      /> */}
       <Button
         title="Add new guide"
         onPress={showModal}
