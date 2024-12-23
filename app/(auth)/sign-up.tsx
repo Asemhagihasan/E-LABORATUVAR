@@ -151,6 +151,7 @@ const SignUp = () => {
             </View>
             <Button
               title={"Sign Up"}
+              titleStyle="text-white text-xl"
               onPress={methods.handleSubmit(onSubmit)}
             />
           </FormProvider>
