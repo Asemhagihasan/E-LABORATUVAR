@@ -4,22 +4,37 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { TouchableOpacity } from "react-native";
 import { useLogout } from "@/hooks/auth/useLogout";
 import { useUser } from "@/hooks/auth/useUser";
+import { useGetProfile } from "@/hooks/profile/useGetProfile";
+import DetailsComponent from "../../../components/details";
 
 const Home = () => {
   const { logout, isPending } = useLogout();
   const { user, isLoadingUser } = useUser();
+  const { profile, isPending: isLoadingProfile } = useGetProfile(user?.id!);
+
+  const capitalizeFirstLetter = (name: string) => {
+    if (!name) return "Back!";
+
+    return name
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(" ");
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-white p-4 gap-4">
       <View className="flex-1">
-        <View className="flex-1 pr-4">
-          <Text className="text-xl font-bold">Admin Dashboard</Text>
-          <Text>{JSON.stringify(user?.user_metadata, null, 2)}</Text>
-          <Text className="text-lg font-medium text-gray-500">
-            Manage patient statuses, monitor doctor activities, and oversee
-            system settings efficiently.
+        <Text className="text-2xl font-bold">
+          Welcome{" "}
+          <Text className="text-[##1D61E7]">
+            {capitalizeFirstLetter(profile?.fullName)}
           </Text>
-        </View>
+        </Text>
+        <Text className="text-lg font-medium text-gray-500 mt-4 mb-5">
+          View your medical test results and gain insights into your health.
+        </Text>
+
+        <DetailsComponent userID={profile?.id || null} />
       </View>
 
       <TouchableOpacity
