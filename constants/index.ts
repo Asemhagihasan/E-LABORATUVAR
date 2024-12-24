@@ -20,7 +20,7 @@ export const card_items: CardProps[] = [
     src: require("@/assets/images/card_item_2.png"),
     description: "Find and explore a variety of trusted doctors.",
     operation_name: "Find Doctors",
-    pageName: "FindDoctors",
+    pageName: "manage-doctors",
     background_color: "bg-blue",
   },
   {

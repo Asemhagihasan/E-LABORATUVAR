@@ -74,6 +74,20 @@ export async function getCurrentUserProfile(userId: string) {
   return data;
 }
 
+export async function getPreviousResultsForUser(userId: string) {
+  if (!userId) return null;
+
+  const { error, data } = await supabase
+    .from("previousresults")
+    .select("*")
+    .eq("patient_id", userId);
+
+  if (error) throw new Error(error.message);
+
+  console.log("data", data);
+  return data;
+}
+
 export async function updateCurrentUser(formData: any) {
   await new Promise((resolve) => setTimeout(resolve, 1000));
   if (formData.newPassword) {

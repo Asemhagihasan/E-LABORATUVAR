@@ -88,7 +88,7 @@ const SignIn = () => {
           </View>
           <Button
             title="Login"
-            titleStyle="text-xl"
+            titleStyle="text-white text-xl"
             disabled={isPending}
             onPress={handleSignIn}
           />
