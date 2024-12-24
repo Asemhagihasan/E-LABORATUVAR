@@ -1,6 +1,6 @@
 import { getPreviousResultsForUser } from "@/services/auth";
 import React, { useEffect, useState } from "react";
-import { Alert, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { DataTable } from "react-native-paper";
 
 export default function DetailsComponent({ userID }: { userID: string }) {

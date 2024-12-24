@@ -9,8 +9,8 @@ import DetailsComponent from "../../../components/details";
 
 const Home = () => {
   const { logout, isPending } = useLogout();
-  const { user, isLoadingUser } = useUser();
-  const { profile, isPending: isLoadingProfile } = useGetProfile(user?.id!);
+  const { user } = useUser();
+  const { profile } = useGetProfile(user?.id!);
 
   const capitalizeFirstLetter = (name: string) => {
     if (!name) return "Back!";
