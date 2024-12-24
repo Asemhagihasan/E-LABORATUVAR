@@ -21,7 +21,7 @@ const Guides = () => {
         <View className="px-6 gap-4">
           <GoBack />
           <Text className="text-2xl text-neutral-900 font-bold text-center -mt-6">
-            Guides Management
+            Guides mangmaent
           </Text>
           <View className="flex-row items-end justify-between">
             <CreateGuide />

@@ -1,4 +1,3 @@
-import { View } from "react-native";
 import React from "react";
 import { Redirect } from "expo-router";
 import { useUser } from "@/hooks/auth/useUser";
@@ -15,7 +14,7 @@ const index = () => {
     role === "user" ? (
       <Redirect href={`./(userRoot)/(tabs)/home`} />
     ) : (
-      <Redirect href={`./(adminRoot)/(home)/admin-home`} />
+      <Redirect href={`./(adminRoot)/admin-home`} />
     )
   ) : (
     <Redirect href="./(auth)/sign-in" />
