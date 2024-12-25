@@ -6,7 +6,6 @@ export const useUpdateProfile = () => {
   const { mutate: updateProfile, isPending } = useMutation({
     mutationFn: (formData: any) => updateCurrentUser(formData),
     onSuccess: () => {
-      console.log("User updated successfully A");
       Toast.show({
         type: "success", // or 'error', 'info'
         text1: "Success!",

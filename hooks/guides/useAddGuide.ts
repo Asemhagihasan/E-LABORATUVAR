@@ -7,7 +7,6 @@ export const useAddGuide = () => {
   const { mutate: addGuide, isPending } = useMutation({
     mutationFn: (guide: Guide) => addGuideApi(guide),
     onSuccess: () => {
-      console.log("Guide added successfully");
       queryClient.invalidateQueries({ queryKey: ["guides"] });
     },
     onError: (err) => {

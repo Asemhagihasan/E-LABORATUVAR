@@ -14,7 +14,6 @@ const GuideActionSelector = ({ guide }: { guide: any }) => {
 
   const confirmDelete = () => {
     deleteGuide(guide.id);
-    console.log(`guide with id ${guide.id} is being deleted`);
     setIsDeleting(false);
   };
 
@@ -36,7 +35,6 @@ const GuideActionSelector = ({ guide }: { guide: any }) => {
         <Menu.Item
           onPress={() => {
             setIsMenuOpen(false);
-            console.log("Update Guide");
           }}
           title="Update Guide"
           leadingIcon="pencil"

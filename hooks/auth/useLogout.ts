@@ -5,7 +5,6 @@ export const useLogout = () => {
   const { mutate: logout, isPending } = useMutation({
     mutationFn: () => logoutApi(),
     onSuccess: () => {
-      console.log("Success");
       router.replace("../../(auth)/sign-in");
     },
   });

@@ -31,7 +31,6 @@ const CreateAnalysis = ({
   };
 
   const handleAddAnalysis = () => {
-    console.log(typeof +result);
     if (!selectedType.value || !result) {
       setError("Please fill in all fields");
       return;

@@ -31,7 +31,6 @@ const SignUp = () => {
   };
 
   const onError: SubmitErrorHandler<FieldValues> = (errors, e) => {
-    console.log(JSON.stringify(errors));
     Alert.alert("Warning", "some thing went wrong");
   };
 

@@ -6,7 +6,6 @@ export const useDeleteGuide = () => {
   const { mutate: deleteGuide, isPending } = useMutation({
     mutationFn: (id: string) => deleteGuideApi(id),
     onSuccess: () => {
-      console.log("Guide deleted successfully");
       queryClient.invalidateQueries({ queryKey: ["guides"] });
     },
     onError: (err) => {

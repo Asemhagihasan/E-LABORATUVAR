@@ -62,7 +62,6 @@ export async function getCurrentUser() {
 export async function getCurrentUserProfile(userId: string) {
   const user = await getCurrentUser();
   if (user?.id !== userId) return null;
-  console.log("user", user.id);
 
   const { error, data } = await supabase
     .from("profiles")
@@ -70,7 +69,6 @@ export async function getCurrentUserProfile(userId: string) {
     .eq("user_id", user.id)
     .single();
   if (error) throw new Error(error.message);
-  console.log("data", data);
   return data;
 }
 
@@ -84,7 +82,6 @@ export async function getPreviousResultsForUser(userId: string) {
 
   if (error) throw new Error(error.message);
 
-  console.log("data", data);
   return data;
 }
 
@@ -97,7 +94,6 @@ export async function updateCurrentUser(formData: any) {
     });
     if (error) throw new Error(`Auth update failed: ${error.message}`);
   }
-  console.log("formData", formData);
 
   const { data, error } = await supabase
     .from("profiles")

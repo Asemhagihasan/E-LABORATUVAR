@@ -2,7 +2,6 @@ import { Guide } from "@/types";
 import { supabase } from "../supabase";
 
 export async function getGuides(guideType: string) {
-  console.log("guideType", guideType);
   const { data: guidelines, error } = await supabase
     .from("guidelines")
     .select("*")
@@ -34,8 +33,6 @@ export async function getGuideAgeRanges() {
 }
 
 export async function addGuide(guide: Guide) {
-  console.log("guide", guide);
-
   // check if guide already exists base on type .minAge .maxAge .ageUnit
   const { data: existingGuides, error: existingGuidesError } = await supabase
     .from("guidelines")

@@ -37,8 +37,6 @@ const GuidesTable = ({ selectedAge, selectedType }: GuidesTableProps) => {
     return <Loader />;
   }
 
-  console.log(convertToGramsPerL(1));
-
   if (filteredGuides?.length === 0 || !filteredGuides) {
     return (
       <Text className="text-center text-neutral-500 text-2xl font-semibold mt-4">

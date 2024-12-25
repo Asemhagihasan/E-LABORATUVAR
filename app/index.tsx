@@ -9,8 +9,6 @@ const index = () => {
   const role = metaData?.role;
 
   if (isLoadingUser) return <Loader />;
-  console.log("user metaData => " + JSON.stringify(metaData));
-  console.log("user role => " + role);
   return isAuthonticated ? (
     role === "user" ? (
       <Redirect href={`./(userRoot)/(tabs)/home`} />

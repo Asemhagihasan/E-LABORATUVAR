@@ -45,7 +45,6 @@ export default function CreateGuide() {
   });
 
   const onSubmit = (data: Guide) => {
-    console.log(data);
     addGuide(data, {
       onSettled: () => {
         methods.reset();

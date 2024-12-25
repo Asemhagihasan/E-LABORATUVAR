@@ -7,7 +7,6 @@ export const useLogin = () => {
     mutationFn: ({ email, password }: SignInProps) =>
       login({ email, password }),
     onSuccess: () => {
-      console.log("Success");
       router.push("/");
     },
     onError: (err) => {
