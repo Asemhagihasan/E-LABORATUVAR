@@ -1,12 +1,13 @@
-import React from "react";
 import { Redirect } from "expo-router";
 import { useUser } from "@/hooks/auth/useUser";
 import Loader from "@/components/ui/Loader";
+import { useGetProfile } from "@/hooks/profile/useGetProfile";
 
 const index = () => {
   const { isLoadingUser, isAuthonticated, metaData, user } = useUser();
+  const { profile, isPending: isLoadingProfile } = useGetProfile(user?.id!);
 
-  const role = metaData?.role;
+  const role = metaData?.role || profile?.role;
 
   if (isLoadingUser) return <Loader />;
   return isAuthonticated ? (

@@ -1,10 +1,13 @@
 import { getCurrentUser } from "@/services/auth";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const useUser = () => {
+  const queryClient = useQueryClient();
+
   const { isPending: isLoadingUser, data: user } = useQuery({
     queryKey: ["user"],
     queryFn: getCurrentUser,
+    staleTime: 0,
   });
 
   return {
@@ -12,5 +15,6 @@ export const useUser = () => {
     isLoadingUser,
     user,
     metaData: user?.user_metadata,
+    clearUser: () => queryClient.removeQueries({ queryKey: ["user"] }),
   };
 };
