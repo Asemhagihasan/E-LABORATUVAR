@@ -85,6 +85,17 @@ export async function getPreviousResultsForUser(userId: string) {
   return data;
 }
 
+export const getProfilesByRole = async (roleName: string) => {
+  const { error, data } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("role", roleName);
+
+  if (error) throw new Error(error.message);
+
+  return data;
+};
+
 export async function updateCurrentUser(formData: any) {
   await new Promise((resolve) => setTimeout(resolve, 1000));
   if (formData.newPassword) {
@@ -112,3 +123,11 @@ export async function updateCurrentUser(formData: any) {
 
   return data;
 }
+
+export const getAnalysisTypes = async () => {
+  const { error, data } = await supabase.from("analyses").select("id, type");
+
+  if (error) throw new Error(error.message);
+
+  return data;
+};
