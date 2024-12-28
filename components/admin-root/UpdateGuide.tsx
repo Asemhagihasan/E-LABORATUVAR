@@ -2,11 +2,11 @@ import { Text, View } from "react-native";
 import React from "react";
 
 const UpdateGuide = ({
-  guide,
+  entity,
   isUpdating,
   setIsUpdating,
 }: {
-  guide: any;
+  entity: any;
   isUpdating: boolean;
   setIsUpdating: (isUpdating: boolean) => void;
 }) => {

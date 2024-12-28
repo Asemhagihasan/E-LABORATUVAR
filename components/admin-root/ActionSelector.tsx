@@ -1,19 +1,18 @@
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useState } from "react";
-import { Menu, IconButton, Portal, Modal } from "react-native-paper";
-import Button from "../ui/Button";
+import { Menu, IconButton } from "react-native-paper";
 import { useDeleteGuide } from "@/hooks/guides/useDeleteGuide";
 import ConfirmDelete from "./ConfirmDelete";
 import UpdateGuide from "./UpdateGuide";
 
-const GuideActionSelector = ({ guide }: { guide: any }) => {
+const ActionSelector = ({ entity }: { entity: any }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   const { deleteGuide } = useDeleteGuide();
 
   const confirmDelete = () => {
-    deleteGuide(guide.id);
+    deleteGuide(entity.id);
     setIsDeleting(false);
   };
 
@@ -28,7 +27,7 @@ const GuideActionSelector = ({ guide }: { guide: any }) => {
             icon="dots-vertical"
             size={24}
             onPress={() => setIsMenuOpen(true)}
-            accessibilityLabel="Open guide actions menu"
+            accessibilityLabel={`Open ${entity.name} Actions Menu`}
           />
         }
       >
@@ -36,7 +35,7 @@ const GuideActionSelector = ({ guide }: { guide: any }) => {
           onPress={() => {
             setIsMenuOpen(false);
           }}
-          title="Update Guide"
+          title={`Update ${entity.name}`}
           leadingIcon="pencil"
           style={styles.menuItems}
         />
@@ -45,7 +44,7 @@ const GuideActionSelector = ({ guide }: { guide: any }) => {
             setIsMenuOpen(false);
             setIsDeleting(true);
           }}
-          title="Delete Guide"
+          title={`Delete ${entity.name}`}
           leadingIcon="delete"
           style={styles.menuItems}
         />
@@ -58,18 +57,19 @@ const GuideActionSelector = ({ guide }: { guide: any }) => {
       <UpdateGuide
         isUpdating={isUpdating}
         setIsUpdating={setIsUpdating}
-        guide={guide}
+        entity={entity}
       />
     </View>
   );
 };
 
-export default GuideActionSelector;
+export default ActionSelector;
+
 const styles = StyleSheet.create({
   menuItems: {
     backgroundColor: "#FFFFFF",
     borderBottomWidth: 1,
-    borderBottomColor: "#F0F0F0", // Optional: Add separator
+    borderBottomColor: "#F0F0F0",
     paddingBottom: 0,
   },
 });

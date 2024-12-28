@@ -10,9 +10,10 @@ const AddNewDoctor = () => {
       <Button
         title="Add New Doctor"
         onPress={() => setShowAddingDoctorModal(true)}
-        containerStyle="bg-gray-100 border border-gray-300 shadow-md rounded-md px-3 py-2"
-        titleStyle="text-gray-800 font-medium"
+        containerStyle="bg-[#1D61E7] border border-gray-300 shadow-md rounded-md px-3 py-2"
+        titleStyle="text-white font-medium"
         leftIcon="doctor"
+        leftIconColor="white"
       />
     </View>
   );
