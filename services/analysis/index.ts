@@ -18,8 +18,6 @@ export async function getPreviousResults(patientId: string) {
     .select("*")
     .eq("patient_id", patientId);
 
-  console.log("data", data);
-
   if (error) throw new Error(error.message);
 
   return data;
@@ -90,7 +88,6 @@ async function getExistingAnalysis(patientId: string, type: string) {
 
 // Helper to handle existing analysis (move to previous results and delete)
 async function handleExistingAnalysis(newAnalysis: any) {
-  console.log("newAnalysis", newAnalysis);
   const { error: updateError, data } = await supabase
     .from("analyses")
     .update(newAnalysis)
@@ -107,7 +104,6 @@ async function getTypeReference(
   type: string,
   patientAge: { label: string; value: number; ageUnit: string }
 ) {
-  console.log("patientAge", patientAge);
   const { data, error } = await supabase
     .from("guidelines")
     .select("min_value, max_value")

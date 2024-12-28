@@ -196,6 +196,7 @@ const Profile = () => {
               />
               <Button
                 onPress={methods.handleSubmit(onSubmit)}
+                titleStyle="text-white text-xl"
                 title={`${isUpdating ? "Updating..." : "Update"}`}
                 disabled={isUpdating}
               />

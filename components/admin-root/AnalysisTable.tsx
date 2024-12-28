@@ -13,13 +13,10 @@ const CustomCell = ({
   label?: any;
   subLabel?: string;
 }) => (
-  console.log("label", label),
-  (
-    <View className="flex flex-col items-center">
-      <Text className="text-gray-600 text-sm">{label || "-"}</Text>
-      {subLabel && <Text className="text-gray-500 text-xs">{subLabel}</Text>}
-    </View>
-  )
+  <View className="flex flex-col items-center">
+    <Text className="text-gray-600 text-sm">{label || "-"}</Text>
+    {subLabel && <Text className="text-gray-500 text-xs">{subLabel}</Text>}
+  </View>
 );
 
 const AnalysisTable = ({

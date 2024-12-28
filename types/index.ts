@@ -108,6 +108,7 @@ export interface CardProps {
   operation_name: string;
   background_color: string;
   src: ImageSourcePropType;
+  background_color_button: string;
 }
 
 export interface GuidesTableProps {

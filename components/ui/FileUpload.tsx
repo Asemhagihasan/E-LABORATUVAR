@@ -46,7 +46,6 @@ const FileUpload: React.FC<FileUploadProps> = ({
 
     if (!pickerResult.canceled) {
       const { uri } = pickerResult.assets[0];
-      console.log(uri);
       const fileData = {
         uri,
         type: "image/jpeg", // Adjust based on your file type

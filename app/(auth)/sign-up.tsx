@@ -31,7 +31,6 @@ const SignUp = () => {
   };
 
   const onError: SubmitErrorHandler<FieldValues> = (errors, e) => {
-    console.log(JSON.stringify(errors));
     Alert.alert("Warning", "some thing went wrong");
   };
 
@@ -151,6 +150,7 @@ const SignUp = () => {
             </View>
             <Button
               title={"Sign Up"}
+              titleStyle="text-white text-xl"
               onPress={methods.handleSubmit(onSubmit)}
             />
           </FormProvider>

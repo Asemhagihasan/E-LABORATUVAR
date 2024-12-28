@@ -3,8 +3,14 @@ import { Stack } from "expo-router";
 
 const AdminRoot = () => {
   return (
-    <Stack initialRouteName="admin-home" screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="admin-home" options={{ headerShown: false }} />
+    <Stack
+      initialRouteName="admin-home"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="admin-home" />
+      <Stack.Screen name="mange-doctors" />
       <Stack.Screen name="patients" />
       <Stack.Screen name="guides" />
       <Stack.Screen name="patient-analysis/:patientId" />

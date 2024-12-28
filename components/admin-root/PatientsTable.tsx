@@ -8,7 +8,6 @@ import { maskNationalId } from "@/utils/helpers";
 
 const PatientsTable = ({ searchQuery }: { searchQuery: string }) => {
   const pathName = usePathname();
-  console.log(pathName);
   const [page, setPage] = useState(0);
 
   const { patients, isLoading } = useGetPatients();

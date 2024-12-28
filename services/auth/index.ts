@@ -62,7 +62,6 @@ export async function getCurrentUser() {
 export async function getCurrentUserProfile(userId: string) {
   const user = await getCurrentUser();
   if (user?.id !== userId) return null;
-  console.log("user", user.id);
 
   const { error, data } = await supabase
     .from("profiles")
@@ -70,9 +69,32 @@ export async function getCurrentUserProfile(userId: string) {
     .eq("user_id", user.id)
     .single();
   if (error) throw new Error(error.message);
-  console.log("data", data);
   return data;
 }
+
+export async function getPreviousResultsForUser(userId: string) {
+  if (!userId) return null;
+
+  const { error, data } = await supabase
+    .from("previousresults")
+    .select("*")
+    .eq("patient_id", userId);
+
+  if (error) throw new Error(error.message);
+
+  return data;
+}
+
+export const getProfilesByRole = async (roleName: string) => {
+  const { error, data } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("role", roleName);
+
+  if (error) throw new Error(error.message);
+
+  return data;
+};
 
 export async function updateCurrentUser(formData: any) {
   await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -83,7 +105,6 @@ export async function updateCurrentUser(formData: any) {
     });
     if (error) throw new Error(`Auth update failed: ${error.message}`);
   }
-  console.log("formData", formData);
 
   const { data, error } = await supabase
     .from("profiles")
@@ -102,3 +123,11 @@ export async function updateCurrentUser(formData: any) {
 
   return data;
 }
+
+export const getAnalysisTypes = async () => {
+  const { error, data } = await supabase.from("analyses").select("id, type");
+
+  if (error) throw new Error(error.message);
+
+  return data;
+};

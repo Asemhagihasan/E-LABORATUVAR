@@ -13,15 +13,17 @@ export const card_items: CardProps[] = [
     description: "Create and personalize a guide to suit your needs.",
     operation_name: "Create Guide",
     pageName: "guides",
-    background_color: "bg-green",
+    background_color: "#bbf7d0",
+    background_color_button: "#16803f",
   },
   {
     itemKey: "2",
     src: require("@/assets/images/card_item_2.png"),
     description: "Find and explore a variety of trusted doctors.",
     operation_name: "Find Doctors",
-    pageName: "FindDoctors",
-    background_color: "bg-blue",
+    pageName: "manage-doctors",
+    background_color: "#b9d9fe",
+    background_color_button: "#1e4ed8",
   },
   {
     itemKey: "3",
@@ -29,7 +31,8 @@ export const card_items: CardProps[] = [
     description: "Easily access and review patient results in detail.",
     operation_name: "Patient Results",
     pageName: "patients",
-    background_color: "bg-red",
+    background_color: "#fdcaca",
+    background_color_button: "#b91e1e",
   },
 ];
 
