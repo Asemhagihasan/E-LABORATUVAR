@@ -30,6 +30,7 @@ const AdminHome = () => {
                 description={item.description}
                 operation_name={item.operation_name}
                 background_color={item.background_color}
+                background_color_button={item.background_color_button}
               />
             );
           })}

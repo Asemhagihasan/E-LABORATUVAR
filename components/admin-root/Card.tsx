@@ -9,11 +9,15 @@ const Card: React.FC<CardProps> = ({
   description,
   operation_name,
   background_color,
+  background_color_button,
 }) => {
   return (
     <View
-      style={{ overflow: "hidden" }}
-      className={`w-52 border border-gray-200 rounded-lg shadow ${background_color}-200`}
+      style={{
+        overflow: "hidden",
+        backgroundColor: background_color,
+      }}
+      className={`w-52 border border-gray-200 rounded-lg shadow`}
     >
       <View className="rounded-t-lg flex justify-center items-center pt-2">
         <Image
@@ -28,7 +32,8 @@ const Card: React.FC<CardProps> = ({
           {description}
         </Text>
         <TouchableOpacity
-          className={`inline-flex items-center px-3 py-2 text-sm font-semibold text-center ${background_color}-700 rounded-md`}
+          className={`inline-flex items-center px-3 py-2 text-sm font-semibold text-center rounded-md`}
+          style={{ backgroundColor: background_color_button }}
           onPress={() => {
             router.push(`./${pageName}/`);
           }}
