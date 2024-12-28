@@ -1,10 +1,11 @@
-import { getPreviousResultsForUser } from "@/services/auth";
+import { getAnalysisTypes, getPreviousResultsForUser } from "@/services/auth";
 import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { DataTable } from "react-native-paper";
 
 export default function DetailsComponent({ userID }: { userID: string }) {
   const [previousResults, setPreviousResults] = useState<any[]>([]);
+  const [analysisTypes, setAnalysisTypes] = useState<any[]>([]);
   const [page, setPage] = useState<number>(0);
   const [numberOfItemsPerPageList] = useState([7, 8, 9]);
   const [itemsPerPage, onItemsPerPageChange] = useState(
@@ -23,8 +24,22 @@ export default function DetailsComponent({ userID }: { userID: string }) {
   }, [userID]);
 
   useEffect(() => {
+    async function fetchAnalysisData() {
+      const data = await getAnalysisTypes();
+
+      setAnalysisTypes(data || []);
+    }
+
+    fetchAnalysisData();
+  }, []);
+
+  useEffect(() => {
     setPage(0);
   }, [itemsPerPage]);
+
+  const getAnalysisTypesById = (id: string) => {
+    return analysisTypes.find((analysis) => analysis.id === id).type || "0";
+  };
 
   return (
     <View className="flex-1 align-top">
@@ -59,7 +74,7 @@ export default function DetailsComponent({ userID }: { userID: string }) {
                 className="flex-row justify-content-start"
               >
                 <DataTable.Cell style={{ justifyContent: "flex-start" }}>
-                  {item.analysis_id}
+                  {getAnalysisTypesById(item.analysis_id)}
                 </DataTable.Cell>
                 <DataTable.Cell
                   numeric
