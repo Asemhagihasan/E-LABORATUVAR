@@ -18,6 +18,8 @@ import { useSignUp } from "@/hooks/auth/useSignUp";
 import { SignUpProps } from "@/types";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Feather from "@expo/vector-icons/Feather";
+import { checkNationalIdExists } from "@/services/auth";
+import Toast from "react-native-toast-message";
 const SignUp = () => {
   const { signUp } = useSignUp();
   const [showPassword, setShowPassword] = useState(false);
@@ -25,13 +27,23 @@ const SignUp = () => {
     resolver: zodResolver(SignUpSchema),
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data: FieldValues) => {
     data.role = "user";
-    signUp(data as SignUpProps);
-  };
 
-  const onError: SubmitErrorHandler<FieldValues> = (errors, e) => {
-    Alert.alert("Warning", "some thing went wrong");
+    // check if the user is existis by national Id
+    const isExistis = await checkNationalIdExists(data.nationalId);
+    if (isExistis) {
+      Toast.show({
+        type: "error",
+        text1: "User was found!",
+        text2: "the national Id is already existis!",
+        text1Style: { fontSize: 16, fontWeight: "bold" },
+        text2Style: { fontSize: 14 },
+      });
+      return;
+    }
+
+    signUp(data as SignUpProps);
   };
 
   return (
