@@ -86,3 +86,13 @@ export const GuideSchema = z
     path: ["maxValue"], // Point to the field causing the issue
     message: "Max value must be greater than min value",
   });
+
+export const AddDoctorSchema = z.object({
+  fullName: fullNameSchema,
+  email: emailSchema,
+  password: passwordSchema.optional(),
+  nationalId: nationalIdSchema,
+  phone: phoneSchema,
+  gender: genderSchema,
+  birthDate: birthDateSchema,
+});
