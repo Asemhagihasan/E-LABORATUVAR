@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import {
-  KeyboardAvoidingView,
-  Platform,
   Text,
   TouchableWithoutFeedback,
   View,
   TouchableOpacity,
-  Keyboard,
 } from "react-native";
-import DatePicker from "react-native-modern-datepicker";
 import Feather from "@expo/vector-icons/Feather";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import { DatePickerFieldProps } from "@/types";
 
 const DatePickerField: React.FC<DatePickerFieldProps> = ({
@@ -24,10 +21,16 @@ const DatePickerField: React.FC<DatePickerFieldProps> = ({
 }) => {
   const [isPickerOpen, setPickerOpen] = useState(false);
 
-  const handleDateChange = (date: string) => {
-    setPickerOpen(false); // Close the picker
-    if (onDateChange) {
-      onDateChange(date); // Pass the selected date back to the parent
+  const handleDateChange = (
+    event: DatePickerFieldProps,
+    selectedDate?: Date
+  ) => {
+    setPickerOpen(false); // Close the picker when a date is selected
+    if (selectedDate) {
+      const dateString = selectedDate.toISOString().split("T")[0]; // Format the date to string (yyyy-mm-dd)
+      if (onDateChange) {
+        onDateChange(dateString); // Pass the formatted date string back to the parent
+      }
     }
   };
 
@@ -56,11 +59,10 @@ const DatePickerField: React.FC<DatePickerFieldProps> = ({
         </TouchableOpacity>
 
         {isPickerOpen && (
-          <DatePicker
-            mode="calendar"
-            selected={value || new Date().toISOString().split("T")[0]} // Default to today's date
-            onDateChange={handleDateChange} // Pass the selected date as a string
-            maximumDate={new Date().toISOString().split("T")[0]}
+          <DateTimePicker
+            value={new Date(value || new Date())}
+            onChange={handleDateChange} // Pass the selected date as a string
+            maximumDate={new Date()}
             options={{
               backgroundColor: "#f9fafb",
               textHeaderColor: "#2563eb",

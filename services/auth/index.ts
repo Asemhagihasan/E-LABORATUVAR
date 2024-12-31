@@ -1,5 +1,5 @@
 import { SignInProps, SignUpProps } from "@/types";
-import { supabase } from "../supabase";
+import { adminSupabase, supabase } from "../supabase";
 
 export async function signUp(formData: SignUpProps) {
   const { data: authUser, error } = await supabase.auth.signUp({
@@ -86,14 +86,18 @@ export async function getPreviousResultsForUser(userId: string) {
 }
 
 export const getProfilesByRole = async (roleName: string) => {
-  const { error, data } = await supabase
+  const { error, data: profiles } = await supabase
     .from("profiles")
     .select("*")
     .eq("role", roleName);
 
   if (error) throw new Error(error.message);
 
-  return data;
+  const currentUser = await getCurrentUser();
+  const filteredDoctors = profiles.filter(
+    (profile) => profile.user_id !== currentUser?.id
+  );
+  return filteredDoctors;
 };
 
 export async function updateCurrentUser(formData: any) {
@@ -124,10 +128,57 @@ export async function updateCurrentUser(formData: any) {
   return data;
 }
 
+export async function creatNewDoctor(formData: any) {
+  const { data: authUser, error } = await adminSupabase.auth.admin.createUser({
+    email: formData.email,
+    password: formData.password,
+    email_confirm: true,
+    user_metadata: {
+      role: "admin", // Custom metadata for the user
+    },
+  });
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  const { error: userError } = await supabase.from("profiles").insert({
+    user_id: authUser?.user?.id,
+    fullName: formData.fullName,
+    gender: formData.gender,
+    birthDate: formData.birthDate,
+    nationalId: formData.nationalId,
+    phone: formData.phone,
+    email: formData.email,
+    role: "admin",
+  });
+  if (userError) await supabase.auth.admin.deleteUser(authUser?.user?.id!);
+
+  return authUser;
+}
+
 export const getAnalysisTypes = async () => {
   const { error, data } = await supabase.from("analyses").select("id, type");
 
   if (error) throw new Error(error.message);
 
   return data;
+};
+
+export const checkNationalIdExists = async (
+  nationalId: string
+): Promise<boolean> => {
+  try {
+    const { error, data } = await supabase
+      .from("profiles")
+      .select("nationalId")
+      .eq("nationalId", nationalId)
+      .single();
+
+    if (error && error.code !== "PGRST116") throw new Error(error.message);
+
+    // if data exists => the nationalId exists
+    return !!data;
+  } catch (err) {
+    throw new Error("Unable to verify National ID. Please try again later.");
+  }
 };

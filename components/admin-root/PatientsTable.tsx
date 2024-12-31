@@ -1,15 +1,13 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useGetPatients } from "@/hooks/patients/useGetPatients";
 import { DataTable, IconButton } from "react-native-paper";
 import Loader from "../ui/Loader";
-import { router, usePathname } from "expo-router";
+import { router } from "expo-router";
 import { maskNationalId } from "@/utils/helpers";
 
 const PatientsTable = ({ searchQuery }: { searchQuery: string }) => {
-  const pathName = usePathname();
   const [page, setPage] = useState(0);
-
   const { patients, isLoading } = useGetPatients();
 
   const filteredPatients = (patients || []).filter(
@@ -17,6 +15,7 @@ const PatientsTable = ({ searchQuery }: { searchQuery: string }) => {
       patient.nationalId.toString().includes(searchQuery) ||
       patient.fullName.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
   // Calculate pagination options dynamically
   const calculateItemsPerPageOptions = () => {
     const totalPatients = filteredPatients.length;

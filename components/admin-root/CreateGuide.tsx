@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import React, { useState } from "react";
 import { Modal, Portal } from "react-native-paper";
 import InputField from "../ui/InputField";
@@ -14,7 +14,7 @@ import { ageUnits } from "@/constants";
 import { useAddGuide } from "@/hooks/guides/useAddGuide";
 import { Guide } from "@/types";
 
-const containerStyle = {
+export const containerStyle = {
   backgroundColor: "white",
   padding: 20,
   width: 360,

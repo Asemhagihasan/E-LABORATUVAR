@@ -90,3 +90,15 @@ export async function deleteGuide(guideId: string) {
 
   return deletedGuide;
 }
+
+// in the future we need to move this function to "doctor" service
+export async function deleteDoctorById(doctorId: string) {
+  const { data: deletedDoctor, error } = await supabase
+    .from("profiles")
+    .delete()
+    .eq("id", doctorId);
+
+  if (error) throw new Error(error.message);
+
+  return deletedDoctor;
+}
