@@ -1,50 +1,29 @@
-# Welcome to your Expo app 👋
+# E-Laboratuvar
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Proje Açıklaması
 
-## Get started
+E-Laboratuvar, laboratuvar süreçlerini dijitalleştirmek ve kolaylaştırmak için geliştirilmiş bir mobil uygulamadır. Bu uygulama, hasta bilgilerini ve tahlil sonuçlarını güvenli bir şekilde yönetmek için Supabase altyapısını kullanır.
 
-1. Install dependencies
+## Temel Özellikler
 
-   ```bash
-   npm install
-   ```
+- **Hasta Yönetimi**: Hasta bilgilerini kaydetme, düzenleme ve takip etme.
+- **Tahlil Sonuçları Yönetimi**: IgA, IgM, IgG gibi test sonuçlarının sistemde kayıtlı tutulması.
+- **Güvenli ve Hızlı Veri Erişimi**: Supabase üzerinden tüm veritabanı işlemleri sağlanır.
+- **Mobil Uygulama Arayüzü**: Kullanıcı dostu tasarımı ile etkili bir deneyim sunar.
 
-2. Start the app
+## Kullanılan Teknolojiler
 
-   ```bash
-    npx expo start
-   ```
+- **React Native**: Mobil uygulama geliştirme için.
+- **Supabase**: Veritabanı ve kullanıcı yönetimi için.
 
-In the output, you'll find options to open the app in a
+## Proje Durumu
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- Geliştirme aşamasında olup, öncelikli olarak hasta bilgileri ve tahlil sonuçlarının yönetimi özelliklerine odaklanılmaktadır.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Katkı Sağlama
 
-## Get a fresh project
+Bu proje açık kaynaklıdır. Katkıda bulunmak isteyenler önerilerini paylaşabilir veya mevcut kodlar üzerinde geliştirme yapabilirler.
 
-When you're ready, run:
+## İletişim
 
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Proje hakkında daha fazla bilgi almak veya katkıda bulunmak için [asemhagihasan@gmail.com].
