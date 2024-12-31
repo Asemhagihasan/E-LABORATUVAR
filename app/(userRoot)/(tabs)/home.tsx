@@ -34,13 +34,13 @@ const Home = () => {
           View your medical test results and gain insights into your health.
         </Text>
 
-        <DetailsComponent userID={profile?.id || null} />
+        <DetailsComponent userID={profile?.id || null} profile={profile} />
       </View>
 
       <TouchableOpacity
         onPress={() => logout()}
         disabled={isPending}
-        className="p-5 rounded-md flex flex-row justify-center items-center bg-red-600 shadow-md shadow-neutral-400/70"
+        className="p-5  rounded-md flex flex-row justify-center items-center bg-red-600 shadow-md shadow-neutral-400/70"
       >
         <Text className="text-white text-lg font-bold">Logout</Text>
       </TouchableOpacity>

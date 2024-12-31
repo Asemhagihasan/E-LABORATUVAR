@@ -10,7 +10,7 @@ const AdminRoot = () => {
       }}
     >
       <Stack.Screen name="admin-home" />
-      <Stack.Screen name="mange-doctors" />
+      <Stack.Screen name="manage-doctors" />
       <Stack.Screen name="patients" />
       <Stack.Screen name="guides" />
       <Stack.Screen name="patient-analysis/:patientId" />
