@@ -1,5 +1,4 @@
 import { Text, View } from "react-native";
-import React, { useState } from "react";
 import { Modal, Portal } from "react-native-paper";
 import Button from "../ui/Button";
 
@@ -7,9 +6,11 @@ const ConfirmDelete = ({
   confirmDelete,
   isDeleting,
   setIsDeleting,
+  entityName,
 }: {
-  confirmDelete: () => void;
   isDeleting: boolean;
+  entityName: string;
+  confirmDelete: () => void;
   setIsDeleting: (isDeleting: boolean) => void;
 }) => {
   return (
@@ -17,7 +18,7 @@ const ConfirmDelete = ({
       <Modal visible={isDeleting} onDismiss={() => setIsDeleting(false)}>
         <View className="flex flex-col gap-2 w-80 mx-auto p-6 bg-white rounded-md">
           <Text className="text-lg font-semibold text-neutral-700 text-center">
-            Are you sure you want to delete this guide?
+            {`Are you sure you want to delete this ${entityName.toLowerCase()}?`}
           </Text>
           <View className="flex flex-row justify-between gap-2 items-center">
             <Button

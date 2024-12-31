@@ -25,8 +25,8 @@ const DoctorDetails = ({ newDoctorRecord }: { newDoctorRecord: any }) => {
 
   useEffect(() => {
     async function fetchData() {
-      const data = await getProfilesByRole("admin");
-      setDoctorsData(data || []);
+      const profiles = await getProfilesByRole("admin");
+      setDoctorsData(profiles || []);
     }
 
     fetchData();
@@ -82,7 +82,7 @@ const DoctorDetails = ({ newDoctorRecord }: { newDoctorRecord: any }) => {
                   {doctor.email || "Not found!"}
                 </DataTable.Cell>
                 <DataTable.Cell className="w-24 flex justify-start">
-                  <ActionSelector entity={{ name: "Doctor" }} />
+                  <ActionSelector entity={{ name: "Doctor", ...doctor }} />
                 </DataTable.Cell>
               </DataTable.Row>
             ))}

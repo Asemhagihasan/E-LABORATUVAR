@@ -3,15 +3,20 @@ import { useState } from "react";
 import { Menu, IconButton } from "react-native-paper";
 import { useDeleteGuide } from "@/hooks/guides/useDeleteGuide";
 import ConfirmDelete from "./ConfirmDelete";
-import UpdateGuide from "./UpdateGuide";
+import { useDeleteDoctor } from "@/hooks/guides/useDeleteDoctor";
 
 const ActionSelector = ({ entity }: { entity: any }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const { deleteGuide } = useDeleteGuide();
+  const { deleteDoctor } = useDeleteDoctor();
+  const entityName = entity?.name;
 
   const confirmDelete = () => {
-    deleteGuide(entity.id);
+    // check the deleting opertion will be do
+    if (entityName === "Guide") deleteGuide(entity.id);
+    else if (entityName === "Doctor") deleteDoctor(entity.id);
+
     setIsDeleting(false);
   };
 
@@ -26,7 +31,7 @@ const ActionSelector = ({ entity }: { entity: any }) => {
             icon="dots-vertical"
             size={24}
             onPress={() => setIsMenuOpen(true)}
-            accessibilityLabel={`Open ${entity.name} Actions Menu`}
+            accessibilityLabel={`Open ${entityName} Actions Menu`}
           />
         }
       >
@@ -35,7 +40,7 @@ const ActionSelector = ({ entity }: { entity: any }) => {
             setIsMenuOpen(false);
             setIsDeleting(true);
           }}
-          title={`Delete ${entity.name}`}
+          title={`Delete ${entityName}`}
           leadingIcon="delete"
           style={styles.menuItems}
         />
@@ -44,6 +49,7 @@ const ActionSelector = ({ entity }: { entity: any }) => {
         confirmDelete={confirmDelete}
         isDeleting={isDeleting}
         setIsDeleting={setIsDeleting}
+        entityName={entityName}
       />
     </View>
   );
