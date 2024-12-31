@@ -92,13 +92,13 @@ export interface TabsProps {
 
 export interface DatePickerFieldProps {
   label?: string;
-  placeholder?: string;
-  value?: string; // Updated to string for compatibility with DatePicker
+  value?: string;
   onDateChange?: (date: string) => void;
+  placeholder?: string;
+  disabled?: boolean;
   containerStyle?: string;
   inputStyle?: string;
   labelStyle?: string;
-  disabled?: boolean;
 }
 
 export interface CardProps {
