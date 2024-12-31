@@ -1,5 +1,5 @@
 import { SignInProps, SignUpProps } from "@/types";
-import { supabase } from "../supabase";
+import { adminSupabase, supabase } from "../supabase";
 
 export async function signUp(formData: SignUpProps) {
   const { data: authUser, error } = await supabase.auth.signUp({
@@ -86,14 +86,18 @@ export async function getPreviousResultsForUser(userId: string) {
 }
 
 export const getProfilesByRole = async (roleName: string) => {
-  const { error, data } = await supabase
+  const { error, data: profiles } = await supabase
     .from("profiles")
     .select("*")
     .eq("role", roleName);
 
   if (error) throw new Error(error.message);
 
-  return data;
+  const currentUser = await getCurrentUser();
+  const filteredDoctors = profiles.filter(
+    (profile) => profile.user_id !== currentUser?.id
+  );
+  return filteredDoctors;
 };
 
 export async function updateCurrentUser(formData: any) {
@@ -125,13 +129,12 @@ export async function updateCurrentUser(formData: any) {
 }
 
 export async function creatNewDoctor(formData: any) {
-  const { data: authUser, error } = await supabase.auth.signUp({
+  const { data: authUser, error } = await adminSupabase.auth.admin.createUser({
     email: formData.email,
     password: formData.password,
-    options: {
-      data: {
-        role: "admin",
-      },
+    email_confirm: true,
+    user_metadata: {
+      role: "admin", // Custom metadata for the user
     },
   });
   if (error) {
