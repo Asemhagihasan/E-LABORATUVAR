@@ -17,7 +17,7 @@ const Card: React.FC<CardProps> = ({
         overflow: "hidden",
         backgroundColor: background_color,
       }}
-      className={`w-52 border border-gray-200 rounded-lg shadow`}
+      className={`w-48 sm:w-52 border border-gray-200 rounded-lg shadow`}
     >
       <View className="rounded-t-lg flex justify-center items-center pt-2">
         <Image

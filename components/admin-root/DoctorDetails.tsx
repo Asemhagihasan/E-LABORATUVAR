@@ -1,6 +1,6 @@
 import { getProfilesByRole } from "@/services/auth";
 import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { DataTable } from "react-native-paper";
 import ActionSelector from "./ActionSelector";
 
@@ -41,54 +41,62 @@ const DoctorDetails = () => {
           </Text>
         </View>
       ) : (
-        <DataTable>
-          <DataTable.Header className="flex-row justify-content-start border-solid bg-gray-100 rounded-md">
-            <DataTable.Title className="justify-start">
-              Doctor Name
-            </DataTable.Title>
-            <DataTable.Title numeric style={{ justifyContent: "flex-start" }}>
-              Doctor Gender
-            </DataTable.Title>
-            <DataTable.Title numeric style={{ justifyContent: "flex-start" }}>
-              Doctor Email
-            </DataTable.Title>
-            <DataTable.Title numeric style={{ justifyContent: "flex-end" }}>
-              Mange
-            </DataTable.Title>
-          </DataTable.Header>
+        <ScrollView horizontal={true}>
+          <DataTable className="">
+            <DataTable.Header className="flex-row justify-content-start border-solid bg-gray-100 rounded-md">
+              <DataTable.Title className="justify-start">
+                Doctor Name
+              </DataTable.Title>
+              <DataTable.Title numeric style={{ justifyContent: "flex-start" }}>
+                Doctor Gender
+              </DataTable.Title>
+              <DataTable.Title numeric style={{ justifyContent: "flex-start" }}>
+                Doctor Email
+              </DataTable.Title>
+              <DataTable.Title numeric style={{ justifyContent: "flex-end" }}>
+                Mange
+              </DataTable.Title>
+            </DataTable.Header>
 
-          {doctorsData.slice(from, to).map((doctor) => (
-            <DataTable.Row
-              key={doctor.user_id}
-              className="flex-row justify-content-start"
-            >
-              <DataTable.Cell style={{ justifyContent: "flex-start" }}>
-                {doctor.fullName || "Not found!"}
-              </DataTable.Cell>
-              <DataTable.Cell numeric style={{ justifyContent: "flex-start" }}>
-                {doctor.gender || "Un Selected!"}
-              </DataTable.Cell>
-              <DataTable.Cell numeric style={{ justifyContent: "flex-start" }}>
-                {doctor.email || "Not found!"}
-              </DataTable.Cell>
-              <DataTable.Cell className="flex justify-end">
-                <ActionSelector entity={{ name: "Doctor" }} />
-              </DataTable.Cell>
-            </DataTable.Row>
-          ))}
+            {doctorsData.slice(from, to).map((doctor) => (
+              <DataTable.Row
+                key={doctor.user_id}
+                className="flex-row justify-content-start"
+              >
+                <DataTable.Cell style={{ justifyContent: "flex-start" }}>
+                  {doctor.fullName || "Not found!"}
+                </DataTable.Cell>
+                <DataTable.Cell
+                  numeric
+                  style={{ justifyContent: "flex-start" }}
+                >
+                  {doctor.gender || "Un Selected!"}
+                </DataTable.Cell>
+                <DataTable.Cell
+                  numeric
+                  style={{ justifyContent: "flex-start" }}
+                >
+                  {doctor.email || "Not found!"}
+                </DataTable.Cell>
+                <DataTable.Cell className="flex justify-end">
+                  <ActionSelector entity={{ name: "Doctor" }} />
+                </DataTable.Cell>
+              </DataTable.Row>
+            ))}
 
-          <DataTable.Pagination
-            page={page}
-            numberOfPages={Math.ceil(doctorsData.length / itemsPerPage)}
-            onPageChange={(page) => setPage(page)}
-            label={`${from + 1}-${to} of ${doctorsData.length}`}
-            numberOfItemsPerPageList={numberOfItemsPerPageList}
-            numberOfItemsPerPage={itemsPerPage}
-            onItemsPerPageChange={onItemsPerPageChange}
-            showFastPaginationControls
-            selectPageDropdownLabel={"Rows per page"}
-          />
-        </DataTable>
+            <DataTable.Pagination
+              page={page}
+              numberOfPages={Math.ceil(doctorsData.length / itemsPerPage)}
+              onPageChange={(page) => setPage(page)}
+              label={`${from + 1}-${to} of ${doctorsData.length}`}
+              numberOfItemsPerPageList={numberOfItemsPerPageList}
+              numberOfItemsPerPage={itemsPerPage}
+              onItemsPerPageChange={onItemsPerPageChange}
+              showFastPaginationControls
+              selectPageDropdownLabel={"Rows per page"}
+            />
+          </DataTable>
+        </ScrollView>
       )}
     </View>
   );

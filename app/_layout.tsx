@@ -7,8 +7,8 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 import "../styles/global.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { PaperProvider } from "react-native-paper";
-import { DefaultTheme } from "react-native-paper";
+import { PaperProvider, DefaultTheme } from "react-native-paper";
+import Toast from "react-native-toast-message";
 
 const theme = {
   ...DefaultTheme,
@@ -52,7 +52,7 @@ export default function RootLayout() {
             <Stack.Screen name="(auth)" options={{ headerShown: false }} />
           </Stack>
           <StatusBar style="auto" />
-          {/* <ToastContainer /> */}
+          <Toast />
         </PaperProvider>
       </QueryClientProvider>
     </>

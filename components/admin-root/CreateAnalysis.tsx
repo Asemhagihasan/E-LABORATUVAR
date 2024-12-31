@@ -93,7 +93,13 @@ const CreateAnalysis = ({
         leftIcon="plus-circle"
         titleStyle="text-white"
         leftIconColor="white"
+        disabled={patient?.birthDate === null}
       />
+      {!patient?.birthDate && (
+        <Text className="text-red-500 text-md text-semibold mt-1 tracking-wider">
+          User must have a birth date and other information to add analysis.
+        </Text>
+      )}
     </>
   );
 };

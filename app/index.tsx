@@ -9,7 +9,8 @@ const index = () => {
 
   const role = metaData?.role || profile?.role;
 
-  if (isLoadingUser) return <Loader />;
+  if (isLoadingUser || isLoadingProfile) return <Loader />;
+
   return isAuthonticated ? (
     role === "user" ? (
       <Redirect href={`./(userRoot)/(tabs)/home`} />

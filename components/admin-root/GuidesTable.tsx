@@ -44,7 +44,8 @@ const GuidesTable = ({ selectedAge, selectedType }: GuidesTableProps) => {
       </Text>
     );
   }
-
+  // console.log("guides => ", JSON.stringify(guides[2], null, 2));
+  // console.log("selectedAge => ", selectedAge);
   return (
     <DataTable>
       <DataTable.Header>

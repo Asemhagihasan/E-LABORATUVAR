@@ -8,7 +8,6 @@ import UpdateGuide from "./UpdateGuide";
 const ActionSelector = ({ entity }: { entity: any }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [isUpdating, setIsUpdating] = useState(false);
   const { deleteGuide } = useDeleteGuide();
 
   const confirmDelete = () => {
@@ -34,14 +33,6 @@ const ActionSelector = ({ entity }: { entity: any }) => {
         <Menu.Item
           onPress={() => {
             setIsMenuOpen(false);
-          }}
-          title={`Update ${entity.name}`}
-          leadingIcon="pencil"
-          style={styles.menuItems}
-        />
-        <Menu.Item
-          onPress={() => {
-            setIsMenuOpen(false);
             setIsDeleting(true);
           }}
           title={`Delete ${entity.name}`}
@@ -53,11 +44,6 @@ const ActionSelector = ({ entity }: { entity: any }) => {
         confirmDelete={confirmDelete}
         isDeleting={isDeleting}
         setIsDeleting={setIsDeleting}
-      />
-      <UpdateGuide
-        isUpdating={isUpdating}
-        setIsUpdating={setIsUpdating}
-        entity={entity}
       />
     </View>
   );
