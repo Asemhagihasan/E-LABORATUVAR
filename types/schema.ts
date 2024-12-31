@@ -69,20 +69,28 @@ export const UpdateProfileSchema = z.object({
 export const GuideSchema = z
   .object({
     type: optionSchema,
-    minValue: z.number().min(0, "Min value must be at least 0"),
-    maxValue: z.number().min(0, "Max value must be at least 0"),
-    minAge: z.number().min(0, "Min age must be at least 0"),
+    minValue: z
+      .string()
+      .refine((value) => Number(value) >= 0, "Min value must be at least 0"),
+    maxValue: z
+      .string()
+      .refine((value) => Number(value) >= 0, "Max value must be at least 0"),
+    minAge: z
+      .string()
+      .refine((value) => Number(value) >= 0, "Min age must be at least 0"),
     maxAge: z
-      .number()
-      .min(1, "Max age must be at least 1")
-      .max(130, "Max age cannot be more than 130"),
+      .string()
+      .refine(
+        (value) => Number(value) >= 0 && Number(value) <= 130,
+        "Max age must be at least 0 and less than 130"
+      ),
     ageUnit: optionSchema,
   })
-  .refine((data) => data.maxAge > data.minAge, {
+  .refine((data) => +data.maxAge > +data.minAge, {
     path: ["maxAge"], // Point to the field causing the issue
     message: "Max age must be greater than min age",
   })
-  .refine((data) => data.maxValue > data.minValue, {
+  .refine((data) => +data.maxValue > +data.minValue, {
     path: ["maxValue"], // Point to the field causing the issue
     message: "Max value must be greater than min value",
   });

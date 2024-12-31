@@ -36,12 +36,7 @@ export default function CreateGuide() {
 
   const methods = useForm<z.infer<typeof GuideSchema>>({
     resolver: zodResolver(GuideSchema),
-    defaultValues: {
-      minValue: 0,
-      maxValue: 0,
-      minAge: 0,
-      maxAge: 0,
-    },
+    defaultValues: {},
   });
 
   const onSubmit = (data: Guide) => {
@@ -96,9 +91,9 @@ export default function CreateGuide() {
                       <InputField
                         label="Min value"
                         placeholder="Enter min value"
-                        value={Number(value).toString()}
+                        value={value}
                         onBlur={onBlur}
-                        onChangeText={(text) => onChange(Number(text))}
+                        onChangeText={onChange}
                         keyboardType="numeric"
                         errorMessage={error?.message}
                       />
@@ -115,9 +110,9 @@ export default function CreateGuide() {
                       <InputField
                         label="Max value"
                         placeholder="Enter max value"
-                        value={Number(value).toString()}
+                        value={value}
                         onBlur={onBlur}
-                        onChangeText={(text) => onChange(Number(text))}
+                        onChangeText={onChange}
                         keyboardType="numeric"
                         errorMessage={error?.message}
                       />
@@ -134,9 +129,9 @@ export default function CreateGuide() {
                       <InputField
                         label="Min age"
                         placeholder="Enter min age"
-                        value={Number(value).toString()}
+                        value={value}
                         onBlur={onBlur}
-                        onChangeText={(text) => onChange(Number(text))}
+                        onChangeText={onChange}
                         keyboardType="numeric"
                         errorMessage={error?.message}
                       />
@@ -153,9 +148,9 @@ export default function CreateGuide() {
                       <InputField
                         label="Max age"
                         placeholder="Enter max age"
-                        value={Number(value).toString()}
+                        value={value}
                         onBlur={onBlur}
-                        onChangeText={(text) => onChange(Number(text))}
+                        onChangeText={onChange}
                         keyboardType="numeric"
                         errorMessage={error?.message}
                       />

@@ -25,7 +25,8 @@ export async function getGuidesType() {
 export async function getGuideAgeRanges() {
   const { data: guideAgeRanges, error } = await supabase
     .from("ageranges")
-    .select("min_age, max_age, age_unit");
+    .select("min_age, max_age, age_unit")
+    .order("id");
 
   if (error) throw new Error(error.message);
 
@@ -48,6 +49,16 @@ export async function addGuide(guide: Guide) {
       `could not add guide with existing values (type, minAge, maxAge, ageUnit)`
     );
 
+  const { data: age, error: insertAge } = await supabase
+    .from("ageranges")
+    .insert({
+      min_age: guide.minAge,
+      max_age: guide.maxAge,
+      age_unit: guide.ageUnit.value,
+    });
+
+  if (insertAge) throw new Error(insertAge.message);
+
   const { data: newGuide, error } = await supabase.from("guidelines").insert({
     type: guide.type.value,
     min_value: guide.minValue,
@@ -57,7 +68,15 @@ export async function addGuide(guide: Guide) {
     age_unit: guide.ageUnit.value,
   });
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    const { error: deleteAge } = await supabase
+      .from("ageranges")
+      .delete()
+      .eq("id", age[0].id);
+
+    if (deleteAge) throw new Error(deleteAge.message);
+  }
+
   return newGuide;
 }
 

@@ -130,10 +130,10 @@ export interface Guide {
     value: string;
     label: string;
   };
-  minValue: number;
-  maxValue: number;
-  minAge: number;
-  maxAge: number;
+  minValue: string;
+  maxValue: string;
+  minAge: string;
+  maxAge: string;
   ageUnit: {
     value: string;
     label: string;
