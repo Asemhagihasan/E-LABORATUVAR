@@ -1,29 +1,29 @@
-# E-Laboratuvar
+# E-Laboratory
 
-## Proje Açıklaması
+## Project Description
 
-E-Laboratuvar, laboratuvar süreçlerini dijitalleştirmek ve kolaylaştırmak için geliştirilmiş bir mobil uygulamadır. Bu uygulama, hasta bilgilerini ve tahlil sonuçlarını güvenli bir şekilde yönetmek için Supabase altyapısını kullanır.
+E-Laboratory is a mobile application developed to digitize and streamline laboratory processes. It uses Supabase infrastructure to securely manage patient information and test results.
 
-## Temel Özellikler
+## Key Features
 
-- **Hasta Yönetimi**: Hasta bilgilerini kaydetme, düzenleme ve takip etme.
-- **Tahlil Sonuçları Yönetimi**: IgA, IgM, IgG gibi test sonuçlarının sistemde kayıtlı tutulması.
-- **Güvenli ve Hızlı Veri Erişimi**: Supabase üzerinden tüm veritabanı işlemleri sağlanır.
-- **Mobil Uygulama Arayüzü**: Kullanıcı dostu tasarımı ile etkili bir deneyim sunar.
+- **Patient Management**: Record, edit, and track patient information.
+- **Test Results Management**: Store test results such as IgA, IgM, IgG, etc. in the system.
+- **Secure and Fast Data Access**: All database operations are managed via Supabase.
+- **Mobile Application Interface**: A user-friendly design for an efficient experience.
 
-## Kullanılan Teknolojiler
+## Technologies Used
 
-- **React Native**: Mobil uygulama geliştirme için.
-- **Supabase**: Veritabanı ve kullanıcı yönetimi için.
+- **React Native**: For mobile app development.
+- **Supabase**: For database and user management.
 
-## Proje Durumu
+## Project Status
 
-- Geliştirme aşamasında olup, öncelikli olarak hasta bilgileri ve tahlil sonuçlarının yönetimi özelliklerine odaklanılmaktadır.
+Currently in development, with the primary focus on managing patient information and test results.
 
-## Katkı Sağlama
+## How to Start the Project
 
-Bu proje açık kaynaklıdır. Katkıda bulunmak isteyenler önerilerini paylaşabilir veya mevcut kodlar üzerinde geliştirme yapabilirler.
-
-## İletişim
-
-Proje hakkında daha fazla bilgi almak veya katkıda bulunmak için [asemhagihasan@gmail.com].
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/Asemhagihasan/E-LABORATUVAR
+   cd e-laboratory
+   ```
