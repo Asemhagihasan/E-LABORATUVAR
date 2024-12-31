@@ -1,50 +1,29 @@
-# Welcome to your Expo app 👋
+# E-Laboratory
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Project Description
 
-## Get started
+E-Laboratory is a mobile application developed to digitize and streamline laboratory processes. It uses Supabase infrastructure to securely manage patient information and test results.
 
-1. Install dependencies
+## Key Features
 
+- **Patient Management**: Record, edit, and track patient information.
+- **Test Results Management**: Store test results such as IgA, IgM, IgG, etc. in the system.
+- **Secure and Fast Data Access**: All database operations are managed via Supabase.
+- **Mobile Application Interface**: A user-friendly design for an efficient experience.
+
+## Technologies Used
+
+- **React Native**: For mobile app development.
+- **Supabase**: For database and user management.
+
+## Project Status
+
+Currently in development, with the primary focus on managing patient information and test results.
+
+## How to Start the Project
+
+1. **Clone the Repository**
    ```bash
-   npm install
+   git clone https://github.com/Asemhagihasan/E-LABORATUVAR
+   cd e-laboratory
    ```
-
-2. Start the app
-
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
